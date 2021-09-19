@@ -35,8 +35,6 @@ public class Login extends javax.swing.JFrame {
         UsernameField = new javax.swing.JTextField();
         PasswordLebel = new javax.swing.JLabel();
         PasswordField = new javax.swing.JPasswordField();
-        UsertypeCombo = new javax.swing.JComboBox<>();
-        UsertypeLebel = new javax.swing.JLabel();
         LoginBtn = new javax.swing.JButton();
         LoginPicPanel = new javax.swing.JPanel();
         BgPicLebel = new javax.swing.JLabel();
@@ -50,6 +48,12 @@ public class Login extends javax.swing.JFrame {
         UsernameLebel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         UsernameLebel.setText("Username :");
 
+        UsernameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UsernameFieldActionPerformed(evt);
+            }
+        });
+
         PasswordLebel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         PasswordLebel.setText("Password  :");
 
@@ -58,11 +62,6 @@ public class Login extends javax.swing.JFrame {
                 PasswordFieldActionPerformed(evt);
             }
         });
-
-        UsertypeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        UsertypeLebel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        UsertypeLebel.setText("User type    :");
 
         LoginBtn.setBackground(new java.awt.Color(0, 153, 153));
         LoginBtn.setFont(new java.awt.Font("Ebrima", 1, 14)); // NOI18N
@@ -85,16 +84,13 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, LoginDetailsPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(LoginDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(PasswordLebel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(UsernameLebel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(UsertypeLebel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(PasswordLebel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+                            .addComponent(UsernameLebel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(LoginDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(LoginDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(UsernameField)
-                                .addComponent(PasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                                .addComponent(UsertypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(LoginDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(UsernameField)
+                            .addComponent(PasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                            .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(43, 43, 43))
         );
         LoginDetailsPanelLayout.setVerticalGroup(
@@ -110,11 +106,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(LoginDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PasswordLebel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addGroup(LoginDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(UsertypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(UsertypeLebel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(69, 69, 69)
                 .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -158,6 +150,10 @@ public class Login extends javax.swing.JFrame {
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_LoginBtnActionPerformed
+
+    private void UsernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UsernameFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,7 +200,5 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel TitleLebel;
     private javax.swing.JTextField UsernameField;
     private javax.swing.JLabel UsernameLebel;
-    private javax.swing.JComboBox<String> UsertypeCombo;
-    private javax.swing.JLabel UsertypeLebel;
     // End of variables declaration//GEN-END:variables
 }

@@ -52,18 +52,14 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="PasswordLebel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="PasswordLebel" alignment="0" pref="69" max="32767" attributes="0"/>
                               <Component id="UsernameLebel" alignment="0" max="32767" attributes="0"/>
-                              <Component id="UsertypeLebel" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="LoginBtn" min="-2" pref="130" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="UsernameField" max="32767" attributes="0"/>
-                                  <Component id="PasswordField" pref="209" max="32767" attributes="0"/>
-                                  <Component id="UsertypeCombo" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="UsernameField" max="32767" attributes="0"/>
+                              <Component id="PasswordField" pref="209" max="32767" attributes="0"/>
+                              <Component id="LoginBtn" min="-2" pref="166" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -86,12 +82,7 @@
                       <Component id="PasswordLebel" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       <Component id="PasswordField" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="UsertypeCombo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="UsertypeLebel" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                   <Component id="LoginBtn" min="-2" pref="35" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -117,6 +108,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="UsernameField">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UsernameFieldActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="PasswordLebel">
           <Properties>
@@ -130,29 +124,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PasswordFieldActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="UsertypeCombo">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Item 1"/>
-                <StringItem index="1" value="Item 2"/>
-                <StringItem index="2" value="Item 3"/>
-                <StringItem index="3" value="Item 4"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="UsertypeLebel">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="12" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="User type    :"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="LoginBtn">
           <Properties>
