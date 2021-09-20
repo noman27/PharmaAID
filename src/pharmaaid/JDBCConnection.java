@@ -18,9 +18,9 @@ public class JDBCConnection {
     Statement statement;
     Connection connection;
     public JDBCConnection() {
-        String url = "jdbc:sqlserver://DESKTOP-C4L23FV\\SQLEXPRESS:1433;databaseName=PharmaAID";
+        String url = "jdbc:sqlserver://NOMAN\\SQLEXPRESS:1433;databaseName=PharmaAID";
         String user = "sa";
-        String password = "MyP455forSql";
+        String password = "1234";
         
         try{
             connection = DriverManager.getConnection(url, user, password);        

@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package InterFaces;
-package net.codejava.sql;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -30,9 +29,9 @@ public class MedicineDashboard extends javax.swing.JFrame {
         selectMed();
     }
     
-    String url = "jdbc:sqlserver://DESKTOP-C4L23FV\\SQLEXPRESS:1433;databaseName=PharmaAID";
+    String url = "jdbc:sqlserver://NOMAN\\SQLEXPRESS:1433;databaseName=PharmaAID";
     String user = "sa";
-    String password = "MyP455forSql";
+    String password = "1234";
     
     Connection connection = null;
     Statement  statement = null;
