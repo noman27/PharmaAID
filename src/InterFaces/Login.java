@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package InterFaces;
+import javax.swing.JOptionPane;
+import pharmaaid.*;
 
 /**
  *
@@ -14,6 +16,10 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    String username;
+    String givenPass;
+    String userType;
+    int uID;
     public Login() {
         initComponents();
         
@@ -36,6 +42,7 @@ public class Login extends javax.swing.JFrame {
         PasswordLebel = new javax.swing.JLabel();
         PasswordField = new javax.swing.JPasswordField();
         LoginBtn = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
         LoginPicPanel = new javax.swing.JPanel();
         BgPicLebel = new javax.swing.JLabel();
 
@@ -72,6 +79,8 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Employee", "Customer" }));
+
         javax.swing.GroupLayout LoginDetailsPanelLayout = new javax.swing.GroupLayout(LoginDetailsPanel);
         LoginDetailsPanel.setLayout(LoginDetailsPanelLayout);
         LoginDetailsPanelLayout.setHorizontalGroup(
@@ -92,6 +101,10 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(PasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
                             .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(43, 43, 43))
+            .addGroup(LoginDetailsPanelLayout.createSequentialGroup()
+                .addGap(144, 144, 144)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         LoginDetailsPanelLayout.setVerticalGroup(
             LoginDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,7 +119,9 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(LoginDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PasswordLebel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(69, 69, 69)
+                .addGap(30, 30, 30)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
                 .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -148,7 +163,39 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_PasswordFieldActionPerformed
 
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
-        // TODO add your handling code here:
+        LoginWorks login=new LoginWorks();
+        idGenarate detect=new idGenarate();
+        
+        username=UsernameField.getText();
+        givenPass=PasswordField.getText();
+        userType=jComboBox1.getSelectedItem().toString();
+        uID=login.log_into(username, givenPass, userType);
+        
+        if(uID>0){
+            if(userType.equals("Customer")){
+                CustomerDash cd=new CustomerDash();
+                cd.setUserID(uID);
+                cd.setTitle("PharmaAID | Customer Dashboard");
+                this.hide();
+                cd.setVisible(true);
+                
+                JOptionPane.showMessageDialog(null, "Welcome "+username+" ID ="+uID);
+            }
+            else if(userType.equals("Employee")){
+                EmployeeDash emp=new EmployeeDash();
+                emp.setTitle("PharmaAID | Staff Dashboard");
+                this.hide();
+                emp.setVisible(true);
+                JOptionPane.showMessageDialog(null, "Welcome "+username+" ID ="+uID);
+            }
+            else if(userType.equals("Admin")){
+                JOptionPane.showMessageDialog(null, "Welcome "+username+" ID ="+uID);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "login failed");
+        }
+        
     }//GEN-LAST:event_LoginBtnActionPerformed
 
     private void UsernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameFieldActionPerformed
@@ -200,5 +247,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel TitleLebel;
     private javax.swing.JTextField UsernameField;
     private javax.swing.JLabel UsernameLebel;
+    private javax.swing.JComboBox<String> jComboBox1;
     // End of variables declaration//GEN-END:variables
 }

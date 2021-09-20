@@ -3,11 +3,11 @@ import InterFaces.*;
 import InterFaces.MedicineDashboard;
 public class PharmaAID {
     public static void main(String[] args) {
-        //Login login=new Login();
+        Login login=new Login();
         //New line for test
         
-        //login.setTitle("Pharma AID");
-        //login.setVisible(true);
+        login.setTitle("Pharma AID");
+        login.setVisible(true);
         
         
         
@@ -18,9 +18,9 @@ public class PharmaAID {
 //          customer.CustInsert("Noman594","Abdullah Al Noman", "Dhaka", "abc@yahoo.com", "01552321409");
 //          //customer.userIDGet("NewCustomer");
 //          customer.closeDatabase();
-        CustomerReg signUp=new CustomerReg();
-        signUp.setTitle("Sign Up");
-        signUp.setVisible(true);
+//        CustomerReg signUp=new CustomerReg();
+//        signUp.setTitle("Sign Up");
+//        signUp.setVisible(true);
     }
     
 }
