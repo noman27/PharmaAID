@@ -13,14 +13,11 @@ public class PharmaAID {
         
 //        MedicineDashboard mbdb = new MedicineDashboard();
 //        mbdb.setVisible(true);
-//          Customer customer=new Customer();
-//          customer.CustUserInsert("Noman594", "564898");
-//          customer.CustInsert("Noman594","Abdullah Al Noman", "Dhaka", "abc@yahoo.com", "01552321409");
-//          //customer.userIDGet("NewCustomer");
-//          customer.closeDatabase();
-//        CustomerReg signUp=new CustomerReg();
-//        signUp.setTitle("Sign Up");
-//        signUp.setVisible(true);
+//          Employee emp=new Employee();
+//          emp.EmpUserInsert("NewEmp3", "1236", "Employee");
+//          emp.EmpInsert("NewEmp3", "New Temp 3", "Staff", "2021-12-19", "", 2000.50f);
+//          emp.closeDatabase();
+
     }
     
 }

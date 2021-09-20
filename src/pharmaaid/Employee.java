@@ -7,20 +7,24 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.Date;
 
 public class Employee {
 
-    public Employee() {
-    }
-    
     Connection EmpCon;
     ResultSet resultSet;
     Statement stmt;
     
-    public void EmpUserInsert(String userName,String pass){
+    public Employee() {
+        JDBCConnection connect=new JDBCConnection();
+        EmpCon=connect.getConnection();
+    }
+    
+    
+    public void EmpUserInsert(String userName,String pass,String usertype){
         try {
             
-            String userType="Employee";
+            String userType=usertype;
             String userTableSQL="insert into Users(UserName,User_Pass,User_Type)VALUES(?,?,?)";
              
             PreparedStatement addUser = EmpCon.prepareStatement(userTableSQL);
@@ -38,24 +42,42 @@ public class Employee {
         
     }
     
-    public void CustInsert(String userName,String Emp_Name, String Emp_Type,String address,String email,String contact){
+    public void EmpInsert(String userName,String Emp_Name, String Emp_Type,String dateofjoin,String resignDate,float salary){
         int uid=userIDGet(userName);
+        Date doj=Date.valueOf(dateofjoin);
+        Date rd;
+        
+        if(resignDate.equals("")){
+            rd=null;
+        }else{
+            rd=Date.valueOf(resignDate);
+        }
+             
         
         if(uid!=0){
             try {
             idGenarate EmpID=new idGenarate();
-            int id=EmpID.employeeID();
+            int id;
+            
+            if(Emp_Type.equals("Owner")){
+              id=EmpID.OwnerID();
+            }
+            else{
+                id=EmpID.employeeID();
+            }
             
             String EmpTableSQL="insert into Employee(EmployeeID, UserID, Emp_Name, Emp_Type, DateofJoin, ResignDate, Salary)VALUES(?,?,?,?,?,?,?)";
             
-            PreparedStatement addCustomer=EmpCon.prepareStatement(EmpTableSQL);
-            addCustomer.setInt(1, id);
-            addCustomer.setInt(2, uid);
-            addCustomer.setString(3, address);
-            addCustomer.setString(4, email);
-            addCustomer.setString(5, contact);
-            addCustomer.setInt(6, uid);
-            addCustomer.executeUpdate();
+            PreparedStatement addEmployee=EmpCon.prepareStatement(EmpTableSQL);
+            addEmployee.setInt(1, id);
+            addEmployee.setInt(2, uid);
+            addEmployee.setString(3, Emp_Name);
+            addEmployee.setString(4, Emp_Type);
+            addEmployee.setDate(5, doj);
+            addEmployee.setDate(6, rd);
+            addEmployee.setFloat(7, salary);
+            
+            addEmployee.executeUpdate();
             System.out.println("Employee data added");
             
             } catch (SQLException ex) {
@@ -76,7 +98,7 @@ public class Employee {
             String getuidSQL="select UserID from users where UserName = ? AND User_Type = ?";
             PreparedStatement getID=EmpCon.prepareStatement(getuidSQL);
             getID.setString(1, userName);
-            getID.setString(2, "Customer");
+            getID.setString(2, "Employee");
             resultSet=getID.executeQuery();
             
             if(resultSet.next()){
@@ -89,6 +111,14 @@ public class Employee {
             Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+    }
+    
+    public void closeDatabase(){
+        try {
+            EmpCon.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
