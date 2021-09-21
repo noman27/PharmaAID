@@ -164,7 +164,6 @@ public class Login extends javax.swing.JFrame {
 
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
         LoginWorks login=new LoginWorks();
-        idGenarate detect=new idGenarate();
         
         username=UsernameField.getText();
         givenPass=PasswordField.getText();
@@ -173,6 +172,7 @@ public class Login extends javax.swing.JFrame {
         
         if(uID>0){
             if(userType.equals("Customer")){
+                login.logConClose();
                 CustomerDash cd=new CustomerDash();
                 cd.setUserID(uID);
                 cd.setTitle("PharmaAID | Customer Dashboard");
@@ -182,20 +182,33 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Welcome "+username+" ID ="+uID);
             }
             else if(userType.equals("Employee")){
-                EmployeeDash emp=new EmployeeDash();
-                emp.setTitle("PharmaAID | Staff Dashboard");
-                this.hide();
-                emp.setVisible(true);
-                JOptionPane.showMessageDialog(null, "Welcome "+username+" ID ="+uID);
+                login.logConClose();
+                Employee employee =new Employee();
+                
+                if(employee.getEmpType(uID).equals("Owner")){
+                    OwnerDash od=new OwnerDash();
+                    od.setTitle("PharmaAID | Owner Dashboard");
+                    this.hide();
+                    od.setVisible(true);
+                    JOptionPane.showMessageDialog(null, "Welcome "+username+" ID ="+uID);
+                }
+                else{
+                    EmployeeDash emp=new EmployeeDash();
+                    emp.setTitle("PharmaAID | Staff Dashboard");
+                    this.hide();
+                    emp.setVisible(true);
+                    JOptionPane.showMessageDialog(null, "Welcome "+username+" ID ="+uID);
+                }
             }
             else if(userType.equals("Admin")){
+                login.logConClose();
                 JOptionPane.showMessageDialog(null, "Welcome "+username+" ID ="+uID);
             }
         }
         else{
             JOptionPane.showMessageDialog(null, "login failed");
         }
-        
+        login.logConClose();
     }//GEN-LAST:event_LoginBtnActionPerformed
 
     private void UsernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UsernameFieldActionPerformed

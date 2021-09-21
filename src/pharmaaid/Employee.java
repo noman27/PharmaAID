@@ -113,6 +113,26 @@ public class Employee {
         return id;
     }
     
+    
+    public String getEmpType(int uid){
+        String type="";
+        try {
+            String empTypeSQL="select Emp_Type from Employee where UserID = ?";
+            PreparedStatement emptype=EmpCon.prepareStatement(empTypeSQL);
+            emptype.setInt(1, uid);
+            resultSet=emptype.executeQuery();
+            if(resultSet.next()){
+                type=resultSet.getString("Emp_Type");
+                return type;
+            }
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return type;
+    }
+    
+    
     public void closeDatabase(){
         try {
             EmpCon.close();
