@@ -8,12 +8,12 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Customer {
+public class Customer extends AdminPanel{
     
     Connection custCon;
     ResultSet resultSet;
     Statement stmt;
-    
+    String userType;
     
     public Customer() {
         JDBCConnection connect=new JDBCConnection();
@@ -29,7 +29,7 @@ public class Customer {
     public void CustUserInsert(String userName,String pass){
         try {
             
-            String userType="Customer";
+            userType="Customer";
             String userTableSQL="insert into Users(UserName,User_Pass,User_Type)VALUES(?,?,?)";
              
             PreparedStatement addUser = custCon.prepareStatement(userTableSQL);

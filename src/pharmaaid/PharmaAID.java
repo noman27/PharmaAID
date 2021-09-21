@@ -14,9 +14,11 @@ public class PharmaAID {
 //        MedicineDashboard mbdb = new MedicineDashboard();
 //        mbdb.setVisible(true);
 //          Employee emp=new Employee();
-//          emp.EmpUserInsert("NewEmp3", "1236", "Employee");
-//          emp.EmpInsert("NewEmp3", "New Temp 3", "Staff", "2021-12-19", "", 2000.50f);
+//          emp.UpdateUser(16, "Rafi96", "12395", "Employee", emp.EmpCon);
 //          emp.closeDatabase();
+//          AdminPanel api=new AdminPanel();
+//          api.UpdateUser(15, "Admin0", "110112", "Admin", api.Admincon);
+//          api.closeDatabase();
 
     }
     

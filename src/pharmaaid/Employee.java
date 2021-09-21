@@ -9,12 +9,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.Date;
 
-public class Employee {
+public class Employee extends AdminPanel{
 
     Connection EmpCon;
     ResultSet resultSet;
     Statement stmt;
-    
+    String userType;
     public Employee() {
         JDBCConnection connect=new JDBCConnection();
         EmpCon=connect.getConnection();
@@ -24,7 +24,7 @@ public class Employee {
     public void EmpUserInsert(String userName,String pass,String usertype){
         try {
             
-            String userType=usertype;
+            userType=usertype;
             String userTableSQL="insert into Users(UserName,User_Pass,User_Type)VALUES(?,?,?)";
              
             PreparedStatement addUser = EmpCon.prepareStatement(userTableSQL);

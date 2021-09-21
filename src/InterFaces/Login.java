@@ -202,6 +202,10 @@ public class Login extends javax.swing.JFrame {
             }
             else if(userType.equals("Admin")){
                 login.logConClose();
+                AdminDash AD=new AdminDash();
+                this.hide();
+                AD.setTitle(userType);
+                AD.setVisible(true);
                 JOptionPane.showMessageDialog(null, "Welcome "+username+" ID ="+uID);
             }
         }
