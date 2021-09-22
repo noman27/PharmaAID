@@ -90,6 +90,34 @@ public class Employee extends AdminPanel{
         
     }
     
+    public void EmpUpdateInfo(int UserID,String Name,String type,String dateOfjoin,String resignDate,float Salary,Connection con){
+        
+        Date doj=Date.valueOf(dateOfjoin);
+        Date rd;
+        
+        if(resignDate.equals("")){
+            rd=null;
+        }else{
+            rd=Date.valueOf(resignDate);
+        }
+        
+        try {
+            String updateSQL="UPDATE Employee SET Emp_Name = ?,Emp_Type = ?, DateofJoin = ?, ResignDate = ?, Salary = ? WHERE UserID = ?";
+            PreparedStatement updateEmp=con.prepareStatement(updateSQL);
+            updateEmp.setString(1, Name);
+            updateEmp.setString(2, type);
+            updateEmp.setDate(3, doj);
+            updateEmp.setDate(4, rd);
+            updateEmp.setFloat(5, Salary);
+            updateEmp.setInt(6, UserID);
+            updateEmp.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }
+    
     public int userIDGet(String userName){
         
         int id=0;

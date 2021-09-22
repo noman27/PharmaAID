@@ -16,7 +16,7 @@ public class AdminPanel {
     
     public void UpdateUser(int id,String username, String pass, String userType,Connection admincon){
         
-        if(!sameUserName(userType,admincon).equals(username)){
+        if(!sameUserName(userType,admincon,username).equals(username)){
             try {
                 String updateSQL="UPDATE Users SET UserName = ? , User_Pass = ? , User_Type = ? WHERE UserID = ?";
                 PreparedStatement update=admincon.prepareStatement(updateSQL);
@@ -37,14 +37,15 @@ public class AdminPanel {
         }
     }
         
-    public String sameUserName(String usertyp,Connection admincon){
+    public String sameUserName(String usertyp,Connection admincon,String username){
         
         String id="";
         
         try {
-            String getunameSQL="select UserName from users where User_Type = ?";
+            String getunameSQL="select UserName from users where User_Type = ? AND UserName = ?";
             PreparedStatement getID=admincon.prepareStatement(getunameSQL);
             getID.setString(1, usertyp);
+            getID.setString(2, username);
             rs=getID.executeQuery();
             
             if(rs.next()){

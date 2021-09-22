@@ -77,6 +77,24 @@ public class Customer extends AdminPanel{
         
     }
     
+    public void CustUpdateInfo(int UserID,String Name,String address,String email,String contact,Connection con){
+        try {
+            String updateSQL="UPDATE Customer SET Cust_Name = ?,Cust_address = ?, Cust_Email = ?, Cust_contact = ? WHERE UserID = ?";
+            PreparedStatement updateCust=con.prepareStatement(updateSQL);
+            
+            updateCust.setString(1, Name);
+            updateCust.setString(2, address);
+            updateCust.setString(3, email);
+            updateCust.setString(4, contact);
+            updateCust.setInt(5, UserID);
+            updateCust.executeUpdate();
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public int userIDGet(String userName){
         
         int id=0;
