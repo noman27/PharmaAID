@@ -17,8 +17,12 @@ public class PharmaAID {
 //          emp.UpdateUser(16, "Rafi96", "12395", "Employee", emp.EmpCon);
 //          emp.closeDatabase();
 //          AdminPanel api=new AdminPanel();
-//          api.UpdateUser(15, "Admin0", "110112", "Admin", api.Admincon);
+//          api.UserStatusChange(12, "Blocked");
 //          api.closeDatabase();
+//            LoginWorks log=new LoginWorks();
+//            String stat=log.userStatusCheck("noms42", "12345", "Customer");
+//            System.out.println(stat);
+//            log.logConClose();
 
     }
     

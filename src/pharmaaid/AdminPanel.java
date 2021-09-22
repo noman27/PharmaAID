@@ -60,6 +60,25 @@ public class AdminPanel {
         return id;
     }
     
+    public void UserStatusChange(int uid,String status){
+        try {
+            String statchngSQL="Update Users SET Status = ? WHERE UserID = ?";
+            PreparedStatement statusCh=Admincon.prepareStatement(statchngSQL);
+            statusCh.setString(1, status);
+            statusCh.setInt(2, uid);
+            if(statusCh.executeUpdate()>0){
+                System.out.println("User Status changed");
+            }
+            else{
+                System.out.println("User Status Not changed");
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public int userIDGet(String userName,String usertyp,Connection admincon){
         
         int id=0;

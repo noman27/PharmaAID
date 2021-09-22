@@ -10,8 +10,8 @@ import java.util.logging.Logger;
 public class LoginWorks {
     
     Connection logCon;
-    PreparedStatement getUser;
-    ResultSet result;
+    PreparedStatement getUser,getStats;
+    ResultSet result,statres;
     
     public LoginWorks() {
         JDBCConnection con=new JDBCConnection();
@@ -38,6 +38,27 @@ public class LoginWorks {
             Logger.getLogger(LoginWorks.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+    }
+    
+    public String userStatusCheck(String userName,String pass,String userType){
+        
+        String stat="";
+        try {    
+            String statsSQL="SELECT Status FROM Users WHERE UserName = ? AND User_pass = ? AND User_Type = ?";
+            getStats=logCon.prepareStatement(statsSQL);
+            getStats.setString(1, userName);
+            getStats.setString(2, pass);
+            getStats.setString(3, userType);
+            statres=getStats.executeQuery();
+            if(statres.next()){
+                stat=statres.getString("Status");
+                return stat;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginWorks.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return stat;
     }
     
     public void logConClose(){

@@ -170,7 +170,7 @@ public class Login extends javax.swing.JFrame {
         userType=jComboBox1.getSelectedItem().toString();
         uID=login.log_into(username, givenPass, userType);
         
-        if(uID>0){
+        if(uID>0 && login.userStatusCheck(username, givenPass, userType).equals("Active")){
             if(userType.equals("Customer")){
                 login.logConClose();
                 CustomerDash cd=new CustomerDash();
