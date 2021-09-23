@@ -1,5 +1,6 @@
 package pharmaaid;
 
+import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +9,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Employee extends AdminPanel{
 
@@ -116,6 +118,42 @@ public class Employee extends AdminPanel{
             Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
         }
             
+    }
+    
+    public ArrayList<EmployeeInfos> getEmployeeInfo(String empType,Connection con){
+        
+        ResultSet rs;
+        ArrayList<EmployeeInfos> empInfo=new ArrayList<>();
+        
+        try {    
+            String infoSQL="select * from Employee where Emp_Type = ?";
+            PreparedStatement infos=con.prepareStatement(infoSQL);
+            infos.setString(1, empType);
+            
+            rs=infos.executeQuery();
+            
+            while(rs.next()){
+                EmployeeInfos empinfos=new EmployeeInfos();
+                empinfos.setID(rs.getInt("EmployeeID"));
+                empinfos.setName(rs.getString("Emp_Name"));
+                empinfos.setType(rs.getString("Emp_Type"));
+                empinfos.setDoj(rs.getDate("DateOfJoin").toString());
+                //empinfos.setResDate(rs.getDate("ResignDate").toString());
+                empinfos.setSalary(rs.getInt("Salary"));
+                
+                empInfo.add(empinfos);
+            }
+            return empInfo;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return empInfo;
+    }
+    
+    public void getEmpContacts(){
+    
+          String ContactSQL="select c.ContactID , e.Emp_Name ,c.Contact_No from Employee e JOIN Contacts c ON e.EmployeeID=c.EmployeeID";
     }
     
     public int userIDGet(String userName){
