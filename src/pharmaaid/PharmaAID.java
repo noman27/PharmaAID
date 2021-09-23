@@ -4,7 +4,7 @@ import InterFaces.MedicineDashboard;
 import java.util.ArrayList;
 public class PharmaAID {
     public static void main(String[] args) {
-        Login login=new Login();
+        Login login=new Login();   
         //New line for test
         
         login.setTitle("Pharma AID");
@@ -14,7 +14,7 @@ public class PharmaAID {
 //        
 //        ArrayList<EmployeeInfos> al=new ArrayList<>();
 //        al=emp.getEmployeeInfo("Staff", emp.EmpCon);
-//        
+//        emp.setEmpContact(al, "asdsadasd", "Staff", "01552369408", emp.EmpCon);
 //        for(int i=0;i<al.size();i++){
 //            System.out.println(al.get(i).getID());
 //            System.out.println(al.get(i).getName());

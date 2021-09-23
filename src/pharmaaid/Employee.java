@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class Employee extends AdminPanel{
 
-    Connection EmpCon;
+    public Connection EmpCon;
     ResultSet resultSet;
     Statement stmt;
     String userType;
@@ -151,9 +151,54 @@ public class Employee extends AdminPanel{
         return empInfo;
     }
     
-    public void getEmpContacts(){
+    public ResultSet getEmpContacts(Connection con){
+        
+        ResultSet rs=null;
+        try {
+            String ContactSQL="select c.ContactID , e.Emp_Name ,c.Contact_No from Employee e JOIN Contacts c ON e.EmployeeID=c.EmployeeID";
+            Statement stmt=con.createStatement();
+            rs=stmt.executeQuery(ContactSQL);
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
     
-          String ContactSQL="select c.ContactID , e.Emp_Name ,c.Contact_No from Employee e JOIN Contacts c ON e.EmployeeID=c.EmployeeID";
+    public void setEmpContact(ArrayList<EmployeeInfos> empInfo,String name,String type,String contNo,Connection con){
+        String foundName="";
+        int foundID=0;
+        
+        String setContactSQL="INSERT INTO Contacts(EmployeeID,Contact_No) VALUES(?,?)";
+        
+        for (EmployeeInfos empInfo1 : empInfo) {
+            if(empInfo1.getName().equals(name)){
+                foundName=empInfo1.getName();
+                foundID=empInfo1.getID();
+            }
+        }
+        
+        if(!foundName.equals("") && foundID!=0){
+            try {
+                PreparedStatement setCon=con.prepareStatement(setContactSQL);
+                setCon.setInt(1, foundID);
+                setCon.setString(2, contNo);
+                
+                int conf= setCon.executeUpdate();
+                
+                if(conf>0){
+                    System.out.println("Employee Contact Saved.");
+                }
+                else{
+                    System.out.println("Employee Contact Not Saved.");
+                }
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            System.out.println("Employee doesnt Exist.");
+        }
     }
     
     public int userIDGet(String userName){
