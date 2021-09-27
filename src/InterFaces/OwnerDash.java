@@ -40,7 +40,7 @@ public class OwnerDash extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         SupplyRecords = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        CompanyList = new javax.swing.JPanel();
+        Companylist = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         Logout = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -206,23 +206,28 @@ public class OwnerDash extends javax.swing.JFrame {
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
-        CompanyList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        CompanyList.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Companylist.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Companylist.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Companylist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CompanylistMouseClicked(evt);
+            }
+        });
 
         jLabel7.setText("       COMPANY LIST");
 
-        javax.swing.GroupLayout CompanyListLayout = new javax.swing.GroupLayout(CompanyList);
-        CompanyList.setLayout(CompanyListLayout);
-        CompanyListLayout.setHorizontalGroup(
-            CompanyListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CompanyListLayout.createSequentialGroup()
+        javax.swing.GroupLayout CompanylistLayout = new javax.swing.GroupLayout(Companylist);
+        Companylist.setLayout(CompanylistLayout);
+        CompanylistLayout.setHorizontalGroup(
+            CompanylistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CompanylistLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        CompanyListLayout.setVerticalGroup(
-            CompanyListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CompanyListLayout.createSequentialGroup()
+        CompanylistLayout.setVerticalGroup(
+            CompanylistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CompanylistLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
@@ -273,7 +278,7 @@ public class OwnerDash extends javax.swing.JFrame {
                         .addGap(127, 127, 127)
                         .addGroup(BodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(SupplyRecords, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CompanyList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(Companylist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(BodyLayout.createSequentialGroup()
                         .addGap(342, 342, 342)
                         .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -294,7 +299,7 @@ public class OwnerDash extends javax.swing.JFrame {
                         .addComponent(UserDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(59, 59, 59)))
                 .addGroup(BodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CompanyList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Companylist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(SalesRecord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(BodyLayout.createSequentialGroup()
                         .addGap(3, 3, 3)
@@ -353,6 +358,12 @@ public class OwnerDash extends javax.swing.JFrame {
         login.setVisible(true);
     }//GEN-LAST:event_LogoutMouseClicked
 
+    private void CompanylistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CompanylistMouseClicked
+        CompanyList complist=new CompanyList();
+        complist.setTitle("Company List");
+        complist.setVisible(true);
+    }//GEN-LAST:event_CompanylistMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -390,7 +401,7 @@ public class OwnerDash extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Body;
-    private javax.swing.JPanel CompanyList;
+    private javax.swing.JPanel Companylist;
     private javax.swing.JPanel EmployeeList;
     private javax.swing.JPanel Head;
     private javax.swing.JPanel Logout;

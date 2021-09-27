@@ -30,6 +30,7 @@ public class CompanyList extends javax.swing.JFrame {
         JDBCConnection connect=new JDBCConnection();
         con=connect.getConnection();
         
+        getAllCompany(con);
     }
 
     /**
@@ -154,7 +155,9 @@ public class CompanyList extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ADDCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADDCompActionPerformed
-       
+       CompanyADD comAdd=new CompanyADD();
+       comAdd.setConnection(con);
+       comAdd.setVisible(true);
     }//GEN-LAST:event_ADDCompActionPerformed
 
     private void UpdateCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCompActionPerformed
@@ -162,12 +165,12 @@ public class CompanyList extends javax.swing.JFrame {
     }//GEN-LAST:event_UpdateCompActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-        this.hide();
         try {
             con.close();
         } catch (SQLException ex) {
             Logger.getLogger(CompanyList.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.hide();
     }//GEN-LAST:event_BackActionPerformed
 
     /**
@@ -204,7 +207,7 @@ public class CompanyList extends javax.swing.JFrame {
             }
         });
     }
-    public void getAllCompany(Connection con){
+    private void getAllCompany(Connection con){
         Company comp=new Company();
         rs=comp.getAllCompany(con);
         if(rs==null){
