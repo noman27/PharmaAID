@@ -66,6 +66,11 @@ public class AdminDash extends javax.swing.JFrame {
         });
 
         Logout.setText("Log Out");
+        Logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutActionPerformed(evt);
+            }
+        });
 
         UpdateAdmin.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         UpdateAdmin.setText("UPDATE ADMIN");
@@ -115,6 +120,10 @@ public class AdminDash extends javax.swing.JFrame {
         AdminAdder ad=new AdminAdder();
         ad.setVisible(true);
     }//GEN-LAST:event_ADDEMPActionPerformed
+
+    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_LogoutActionPerformed
 
     /**
      * @param args the command line arguments

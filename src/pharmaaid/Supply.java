@@ -52,6 +52,17 @@ public class Supply {
         }
     }
     
+    public void deleteSupplyRecord(int id,Connection con){
+        try {
+            String suppDelSQL="delete from Supply where MedID = ?";
+            PreparedStatement delsupp=con.prepareStatement(suppDelSQL);
+            delsupp.setInt(1, id);
+            delsupp.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Supply.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } 
+    
     public ResultSet supplyFullRecord(Connection con){
         ResultSet rs=null;
         Statement stmt;

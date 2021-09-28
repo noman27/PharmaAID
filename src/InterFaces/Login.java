@@ -43,6 +43,7 @@ public class Login extends javax.swing.JFrame {
         PasswordField = new javax.swing.JPasswordField();
         LoginBtn = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
+        CustReg = new javax.swing.JButton();
         LoginPicPanel = new javax.swing.JPanel();
         BgPicLebel = new javax.swing.JLabel();
 
@@ -81,6 +82,15 @@ public class Login extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Employee", "Customer" }));
 
+        CustReg.setBackground(new java.awt.Color(0, 153, 153));
+        CustReg.setFont(new java.awt.Font("Ebrima", 1, 14)); // NOI18N
+        CustReg.setText("SignUp Customer");
+        CustReg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CustRegActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout LoginDetailsPanelLayout = new javax.swing.GroupLayout(LoginDetailsPanel);
         LoginDetailsPanel.setLayout(LoginDetailsPanelLayout);
         LoginDetailsPanelLayout.setHorizontalGroup(
@@ -96,10 +106,12 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(PasswordLebel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
                             .addComponent(UsernameLebel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(LoginDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(UsernameField)
-                            .addComponent(PasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
-                            .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(LoginDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CustReg, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(LoginDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(UsernameField)
+                                .addComponent(PasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE)
+                                .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(43, 43, 43))
             .addGroup(LoginDetailsPanelLayout.createSequentialGroup()
                 .addGap(144, 144, 144)
@@ -123,6 +135,8 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(LoginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(CustReg, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -219,6 +233,12 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_UsernameFieldActionPerformed
 
+    private void CustRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustRegActionPerformed
+        CustomerReg creg=new CustomerReg();
+        creg.setTitle("Customer SignUp");
+        creg.setVisible(true);
+    }//GEN-LAST:event_CustRegActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -256,6 +276,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BgPicLebel;
+    private javax.swing.JButton CustReg;
     private javax.swing.JButton LoginBtn;
     private javax.swing.JPanel LoginDetailsPanel;
     private javax.swing.JPanel LoginPicPanel;

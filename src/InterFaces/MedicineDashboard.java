@@ -13,7 +13,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
-import pharmaaid.JDBCConnection;
+import pharmaaid.*;
 
 /**
  *
@@ -259,6 +259,7 @@ public class MedicineDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_addMedActionPerformed
 
     private void deleteMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMedActionPerformed
+        Supply supp=new Supply();
         if(medID.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(this, "Enter more details");
@@ -270,6 +271,7 @@ public class MedicineDashboard extends javax.swing.JFrame {
                 String Id = medID.getText();
                 String query = "delete from Medicine where MedID = " + Id;
                 Statement add = connection.createStatement();
+                supp.deleteSupplyRecord(Integer.valueOf(Id), connection);
                 add.executeUpdate(query);
                 selectMed();
                 JOptionPane.showMessageDialog(this, "Medicine Deleted from the list");

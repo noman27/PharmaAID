@@ -138,6 +138,11 @@ public class AdminAdder extends javax.swing.JFrame {
 
         CANCELbtn.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         CANCELbtn.setText("CANCEL");
+        CANCELbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CANCELbtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout MainBodyLayout = new javax.swing.GroupLayout(MainBody);
         MainBody.setLayout(MainBodyLayout);
@@ -278,6 +283,10 @@ public class AdminAdder extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_ADDbtnActionPerformed
+
+    private void CANCELbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CANCELbtnActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_CANCELbtnActionPerformed
 
     /**
      * @param args the command line arguments

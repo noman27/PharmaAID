@@ -259,10 +259,7 @@ public class CustomerReg extends javax.swing.JFrame {
 
     private void CancelbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelbtnActionPerformed
         this.hide();
-        Login login=new Login();
-               
-        login.setTitle("Pharma AID");
-        login.setVisible(true);
+        
     }//GEN-LAST:event_CancelbtnActionPerformed
 
     /**
