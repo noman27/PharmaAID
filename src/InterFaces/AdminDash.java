@@ -123,6 +123,9 @@ public class AdminDash extends javax.swing.JFrame {
 
     private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
         this.setVisible(false);
+        Login login=new Login();
+        login.setTitle("Login");
+        login.setVisible(true);
     }//GEN-LAST:event_LogoutActionPerformed
 
     /**
