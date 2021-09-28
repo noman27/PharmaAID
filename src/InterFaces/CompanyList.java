@@ -215,8 +215,8 @@ public class CompanyList extends javax.swing.JFrame {
         }
         else{
             CompanyTable.setModel(DbUtils.resultSetToTableModel(rs));
-            
         }
+            
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ADDComp;

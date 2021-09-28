@@ -13,7 +13,7 @@ public class Company {
         int id=0;
         ResultSet rs;
         try {    
-            String compExistsSQL="select * from Company where compName = ?";
+            String compExistsSQL="select * from Company where Company_name = ?";
             PreparedStatement compExist=con.prepareStatement(compExistsSQL);
             compExist.setString(1, compName);
             rs=compExist.executeQuery();

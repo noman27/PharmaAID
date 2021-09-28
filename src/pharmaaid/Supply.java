@@ -1,15 +1,65 @@
 package pharmaaid;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 public class Supply {
     
     int comp_id;
     int med_id;
+    float medprice;
+    Date medExpDate;
+    Date medMfgDate;
+    String type;
     
     public Supply() {
     }
     
-    public void supplyAdd(String medName,String companyName,int qty,int batch_no,String salesMan,String supply_date,String status,Connection con){
-        
+    public void supplyAdd(String medName,String companyName,int qty,int batch_no,String salesMan,String supply_date,float mg,Connection con){
+        Date supplyDate=Date.valueOf(supply_date);
+        try {
+            Company comp=new Company();
+            Medicine med=new Medicine();
+            
+            String supplyInsSQL="insert into Supply(MedID,CompanyID,Batch_No,Qty,SalesMan,Supp_Date)VALUES(?,?,?,?,?,?)";
+            PreparedStatement supplyAdd=con.prepareStatement(supplyInsSQL);
+            
+            comp_id=comp.companyExists(companyName, con);
+            med_id=med.medicineExists(medName, companyName, mg, con);
+            
+            if(med_id>0){
+                med.medicineUpdate(med_id, qty, con);
+                supplyAdd.setInt(1, med_id);
+                supplyAdd.setInt(2, comp_id);
+                supplyAdd.setInt(3, batch_no);
+                supplyAdd.setInt(4, qty);
+                supplyAdd.setString(5, salesMan);
+                supplyAdd.setDate(6, supplyDate);
+                supplyAdd.executeUpdate();
+            }else{
+                med.medicineInsert(medName, type, companyName, medExpDate, medMfgDate, qty, mg, medprice, con);
+                med_id=med.medicineExists(medName, companyName, mg, con);
+                
+                supplyAdd.setInt(1, med_id);
+                supplyAdd.setInt(2, comp_id);
+                supplyAdd.setInt(3, batch_no);
+                supplyAdd.setInt(4, qty);
+                supplyAdd.setString(5, salesMan);
+                supplyAdd.setDate(6, supplyDate);
+                supplyAdd.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Supply.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
+    public void supllyRecord(){
+    
+    }
+    
+    public void setMedValues(float mrp,String exp,String mfgDate,String type){ 
+        this.medprice=mrp;
+        this.medExpDate=Date.valueOf(exp);
+        this.medMfgDate=Date.valueOf(mfgDate);
+        this.type=type;
+    }
 }

@@ -7,9 +7,31 @@ public class Medicine {
 
     Connection medCon;
     ResultSet medRes=null;
+    float price;
+    Date ExpDate;
+    Date MfgDate;
     
     public Medicine() {
         
+    }
+    
+    public void medicineInsert(String name,String type,String comp,Date exp,Date mfg,int qty,float mg,float price,Connection con){
+        try {
+            String medInsertSQL="insert into Medicine(MedicineName,Med_type,Company,Exp_Date,Mfg_Date,Qty,Mg,Price)VALUES(?,?,?,?,?,?,?,?)";
+            PreparedStatement medInsert=con.prepareStatement(medInsertSQL);
+            medInsert.setString(1, name);
+            medInsert.setString(2, type);
+            medInsert.setString(3, comp);
+            medInsert.setDate(4, exp);
+            medInsert.setDate(5, mfg);
+            medInsert.setInt(6, qty);
+            medInsert.setFloat(7, mg);
+            medInsert.setFloat(8, price);
+            medInsert.executeUpdate();
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(Medicine.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public int medicineExists(String medName,String company,float mg,Connection con){
@@ -30,4 +52,23 @@ public class Medicine {
         }
         return id;
     }
+    
+    public void medicineUpdate(int id,int qty,Connection con){
+        
+        try {
+            String medUpdateSQL="update Medicine set Qty = ? where MedID = ?";
+            PreparedStatement medInsert=con.prepareStatement(medUpdateSQL);
+            medInsert.setInt(1, qty);
+            medInsert.setInt(2, id);
+            medInsert.executeUpdate();
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(Medicine.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void medicineUpdate(int id,String name,String type,String comp,Date exp,Date mfg,int qty,float mg,float price,Connection con){
+    
+    }
+    
 }
