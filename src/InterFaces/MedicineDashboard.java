@@ -111,6 +111,11 @@ public class MedicineDashboard extends javax.swing.JFrame {
         medicineList.setText("Medicine List");
 
         back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("ID");
 
@@ -287,10 +292,10 @@ public class MedicineDashboard extends javax.swing.JFrame {
                 String updateQuery 
                         = "Update Medicine set MedicineName = '" + medName.getText() + "'"
                         + ", Company = '" + medCompany.getText() + "'"
-                        + ", Qty = '" + medQty.getText() + "'"
-                        + ", Price = '" + medPrice.getText() + "'"
-                        + ", Mg = '" + medMgML.getText() + "'"
-                        + "where MedID = " + medID.getText();
+                        + ", Qty = '" + Integer.valueOf(medQty.getText())  + "'"
+                        + ", Price = '" +Float.valueOf(medPrice.getText())  + "'"
+                        + ", Mg = '" +Float.valueOf(medMgML.getText())  + "'"
+                        + "where MedID = " + Integer.valueOf(medID.getText()) ;
                 Statement add = connection.createStatement();
                 add.executeUpdate(updateQuery);
                 JOptionPane.showMessageDialog(this, "Medicine Updated");
@@ -304,11 +309,15 @@ public class MedicineDashboard extends javax.swing.JFrame {
         int index = medicineInfo.getSelectedRow();
         medID.setText(model.getValueAt(index, 0).toString());
         medName.setText(model.getValueAt(index, 1).toString());
-        medCompany.setText(model.getValueAt(index, 2).toString());
-        medQty.setText(model.getValueAt(index, 3).toString());
-        medPrice.setText(model.getValueAt(index, 4).toString());
-        medMgML.setText(model.getValueAt(index, 5).toString());
+        medCompany.setText(model.getValueAt(index, 3).toString());
+        medQty.setText(model.getValueAt(index, 6).toString());
+        medPrice.setText(model.getValueAt(index, 8).toString());
+        medMgML.setText(model.getValueAt(index, 7).toString());
     }//GEN-LAST:event_medicineInfoMouseClicked
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_backActionPerformed
 
     /**
      * @param args the command line arguments

@@ -56,6 +56,11 @@ public class EmployeeManage extends javax.swing.JFrame {
         );
 
         EmpList.setText("EMPLOYEE LIST");
+        EmpList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmpListActionPerformed(evt);
+            }
+        });
 
         EmpContacts.setText("EMPLOYEE CONTACTS");
         EmpContacts.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +133,11 @@ public class EmployeeManage extends javax.swing.JFrame {
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_BackActionPerformed
+
+    private void EmpListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmpListActionPerformed
+        EmployeeList emlist=new EmployeeList();
+        emlist.setVisible(true);
+    }//GEN-LAST:event_EmpListActionPerformed
 
     /**
      * @param args the command line arguments

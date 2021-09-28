@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 package InterFaces;
-
-
+import pharmaaid.*;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -16,8 +19,13 @@ public class EmployeeList extends javax.swing.JFrame {
     /**
      * Creates new form OwnerDashboard
      */
+    Connection con;
+    ResultSet rs;
     public EmployeeList() {
         initComponents();
+        JDBCConnection connect=new JDBCConnection();
+        con=connect.getConnection();
+        showAllEmployee(con);
     }
 
     /**
@@ -46,8 +54,9 @@ public class EmployeeList extends javax.swing.JFrame {
         addEmployee = new javax.swing.JButton();
         updateEmployeeList = new javax.swing.JButton();
         deleteEmployee = new javax.swing.JButton();
+        Back = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         ownerLabel.setFont(new java.awt.Font("Arial", 0, 36)); // NOI18N
         ownerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -61,17 +70,17 @@ public class EmployeeList extends javax.swing.JFrame {
 
         userTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Name", "Phone No", "E-mail", "Password", "Join Date", "Date of Resign"
+                "ID", "Name", "Type", "Join Date", "Date of Resign", "Salary"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -79,9 +88,6 @@ public class EmployeeList extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(userTable);
-        if (userTable.getColumnModel().getColumnCount() > 0) {
-            userTable.getColumnModel().getColumn(6).setResizable(false);
-        }
 
         jLabel1.setText("Date of Joining");
 
@@ -100,6 +106,13 @@ public class EmployeeList extends javax.swing.JFrame {
 
         deleteEmployee.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         deleteEmployee.setText("DELETE");
+
+        Back.setText("Back");
+        Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,7 +152,10 @@ public class EmployeeList extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ownerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ownerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 871, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -147,7 +163,9 @@ public class EmployeeList extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(ownerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ownerLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Back))
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ownerNameLabel)
@@ -175,11 +193,21 @@ public class EmployeeList extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateEmployeeListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEmployeeListActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_updateEmployeeListActionPerformed
+
+    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
+        try {
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.setVisible(false);
+    }//GEN-LAST:event_BackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,8 +246,15 @@ public class EmployeeList extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void showAllEmployee(Connection con){
+        Employee emp=new Employee();
+        rs=emp.getEmployeeInfo(con);
+        userTable.setModel(DbUtils.resultSetToTableModel(rs));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Back;
     private javax.swing.JButton addEmployee;
     private javax.swing.JTextField dateOfJoin;
     private javax.swing.JTextField dateOfResign;

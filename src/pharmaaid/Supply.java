@@ -52,8 +52,18 @@ public class Supply {
         }
     }
     
-    public void supllyRecord(){
-    
+    public ResultSet supplyFullRecord(Connection con){
+        ResultSet rs=null;
+        Statement stmt;
+        try {    
+            String fullSQL="select d.SupplyID,f.MedicineName,c.Company_name,d.Batch_No,d.Qty,d.SalesMan,d.Supp_Date from Medicine f JOIN Supply d ON f.MedID=d.MedID JOIN Company c ON c.CompanyID=d.CompanyID";
+            stmt=con.createStatement();
+            rs=stmt.executeQuery(fullSQL);
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(Supply.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
     }
     
     public void setMedValues(float mrp,String exp,String mfgDate,String type){ 
