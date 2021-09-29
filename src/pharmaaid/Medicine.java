@@ -66,6 +66,9 @@ public class Medicine {
             Logger.getLogger(Medicine.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public void searchMedicine(String n,String s){
+        String searchSQL="select * from Medicine where MedicineName LIKE '"+n+"%' OR Company LIKE '"+s+"%'";
+    }
     
     public void medicineUpdate(int id,String name,String type,String comp,Date exp,Date mfg,int qty,float mg,float price,Connection con){
     

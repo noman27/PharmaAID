@@ -77,6 +77,11 @@ public class AdminDash extends javax.swing.JFrame {
 
         UserManage.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         UserManage.setText("USER MANAGE");
+        UserManage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UserManageActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -116,7 +121,7 @@ public class AdminDash extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ADDEMPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ADDEMPActionPerformed
-        this.hide();
+        
         AdminAdder ad=new AdminAdder();
         ad.setVisible(true);
     }//GEN-LAST:event_ADDEMPActionPerformed
@@ -127,6 +132,11 @@ public class AdminDash extends javax.swing.JFrame {
         login.setTitle("Login");
         login.setVisible(true);
     }//GEN-LAST:event_LogoutActionPerformed
+
+    private void UserManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserManageActionPerformed
+        UsersList use=new UsersList();
+        use.setVisible(true);
+    }//GEN-LAST:event_UserManageActionPerformed
 
     /**
      * @param args the command line arguments

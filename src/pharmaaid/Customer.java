@@ -50,7 +50,7 @@ public class Customer extends AdminPanel{
     public void CustInsert(String userName,String name,String address,String email,String contact){
         int uid=userIDGet(userName);
         
-        if(uid!=0){
+        if(uid==0){
             try {
             idGenarate custID=new idGenarate();
             int id=custID.customerID();
@@ -109,7 +109,7 @@ public class Customer extends AdminPanel{
             if(resultSet.next()){
                 id=resultSet.getInt("UserID");
                 //System.out.println("Customer user id is="+id);
-                
+                return id;
             }
             
         } catch (SQLException ex) {
