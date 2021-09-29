@@ -66,8 +66,30 @@ public class Medicine {
             Logger.getLogger(Medicine.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void searchMedicine(String n,String s){
-        String searchSQL="select * from Medicine where MedicineName LIKE '"+n+"%' OR Company LIKE '"+s+"%'";
+    public ResultSet searchMedicine(String name,String company,float mg,Connection con){
+        ResultSet rs=null;
+        try {
+            String searchSQL="select * from Medicine where  (Mg="+mg+") AND (MedicineName LIKE '"+name+"%') OR (Company LIKE '"+company+"%')";
+            Statement stmt=con.createStatement();
+            rs=stmt.executeQuery(searchSQL);
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(Medicine.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
+    
+    public ResultSet searchMedicine(Connection con){
+        ResultSet rs=null;
+        try {
+            String searchSQL="select * from Medicine";
+            Statement stmt=con.createStatement();
+            rs=stmt.executeQuery(searchSQL);
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(Medicine.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
     }
     
     public void medicineUpdate(int id,String name,String type,String comp,Date exp,Date mfg,int qty,float mg,float price,Connection con){

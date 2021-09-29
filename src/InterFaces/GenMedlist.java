@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 package InterFaces;
+import java.sql.*;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
+import pharmaaid.*;
 
 /**
  *
@@ -14,8 +19,16 @@ public class GenMedlist extends javax.swing.JFrame {
     /**
      * Creates new form GenMedlist
      */
+    Connection con;
+    ResultSet rs;
+    
+    String comp,name;
+    float MG;
+    
     public GenMedlist() {
         initComponents();
+        JDBCConnection connect=new JDBCConnection();
+        con=connect.getConnection();
     }
 
     /**
@@ -32,7 +45,7 @@ public class GenMedlist extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        medTable = new javax.swing.JTable();
         Search = new javax.swing.JButton();
         compName = new javax.swing.JTextField();
         MedName = new javax.swing.JTextField();
@@ -40,8 +53,9 @@ public class GenMedlist extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        ALLmeds = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Backbtn.setText("Back");
         Backbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +89,7 @@ public class GenMedlist extends javax.swing.JFrame {
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        medTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -83,7 +97,7 @@ public class GenMedlist extends javax.swing.JFrame {
                 "MedID", "Name", "Type", "Exp.Date", "Mfg.Date", "Qty", "Price"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(medTable);
 
         Search.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         Search.setText("SEARCH");
@@ -108,6 +122,14 @@ public class GenMedlist extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel4.setText("Mg");
 
+        ALLmeds.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        ALLmeds.setText("SHOW ALL");
+        ALLmeds.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ALLmedsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -127,7 +149,9 @@ public class GenMedlist extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(mg, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
-                .addComponent(Search, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ALLmeds, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Search, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))
                 .addGap(47, 47, 47))
         );
         jPanel2Layout.setVerticalGroup(
@@ -142,8 +166,10 @@ public class GenMedlist extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(ALLmeds)
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -162,6 +188,7 @@ public class GenMedlist extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackbtnActionPerformed
@@ -173,8 +200,21 @@ public class GenMedlist extends javax.swing.JFrame {
     }//GEN-LAST:event_mgActionPerformed
 
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
-        
+        setAllData();
+        if(name.isEmpty() && comp.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Search fields are empty");
+        }else{
+            Medicine med=new Medicine();
+            rs=med.searchMedicine(name, comp, MG, con);
+            medTable.setModel(DbUtils.resultSetToTableModel(rs));
+        }
     }//GEN-LAST:event_SearchActionPerformed
+
+    private void ALLmedsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ALLmedsActionPerformed
+        Medicine med=new Medicine();
+        rs=med.searchMedicine(con);
+        medTable.setModel(DbUtils.resultSetToTableModel(rs));
+    }//GEN-LAST:event_ALLmedsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -210,8 +250,19 @@ public class GenMedlist extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void setAllData(){
+        try{
+            this.name=MedName.getText();
+            this.comp=compName.getText();
+            this.MG=Float.parseFloat(mg.getText());
+        }catch(NumberFormatException e){
+             JOptionPane.showMessageDialog(null, "Mg is missing or wrong format");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ALLmeds;
     private javax.swing.JButton Backbtn;
     private javax.swing.JTextField MedName;
     private javax.swing.JButton Search;
@@ -223,7 +274,7 @@ public class GenMedlist extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable medTable;
     private javax.swing.JTextField mg;
     // End of variables declaration//GEN-END:variables
 }

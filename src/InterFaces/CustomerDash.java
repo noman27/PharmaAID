@@ -15,7 +15,7 @@ public class CustomerDash extends javax.swing.JFrame {
      * Creates new form CustomerDash
      */
     int currentUserID;
-    
+    Login log;
     public CustomerDash() {
         initComponents();
     }
@@ -260,7 +260,8 @@ public class CustomerDash extends javax.swing.JFrame {
     }//GEN-LAST:event_UserDetailsMouseClicked
 
     private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
-        // TODO add your handling code here:
+        this.setVisible(false);
+        log.setVisible(true);
     }//GEN-LAST:event_logoutMouseClicked
 
     private void OrderHistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OrderHistMouseClicked
@@ -268,7 +269,8 @@ public class CustomerDash extends javax.swing.JFrame {
     }//GEN-LAST:event_OrderHistMouseClicked
 
     private void MedicineListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MedicineListMouseClicked
-        // TODO add your handling code here:
+        GenMedlist gml=new GenMedlist();
+        gml.setVisible(true);
     }//GEN-LAST:event_MedicineListMouseClicked
 
     private void OrderMedMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OrderMedMouseClicked
@@ -312,6 +314,9 @@ public class CustomerDash extends javax.swing.JFrame {
     
     public void setUserID(int id){
         currentUserID=id;
+    }
+    public void getLogObject(Login log){
+        this.log=log;
     }
     
     

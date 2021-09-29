@@ -189,6 +189,7 @@ public class Login extends javax.swing.JFrame {
                 login.logConClose();
                 CustomerDash cd=new CustomerDash();
                 cd.setUserID(uID);
+                cd.getLogObject(this);
                 cd.setTitle("PharmaAID | Customer Dashboard");
                 this.hide();
                 cd.setVisible(true);
