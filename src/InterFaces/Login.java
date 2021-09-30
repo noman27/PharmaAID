@@ -208,7 +208,8 @@ public class Login extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Welcome "+username+" ID ="+uID);
                 }
                 else{
-                    EmployeeDash emp=new EmployeeDash();
+                    EmployeeSales emp=new EmployeeSales();
+                    emp.getCurrentEmpID(uID);
                     emp.setTitle("PharmaAID | Staff Dashboard");
                     this.hide();
                     emp.setVisible(true);

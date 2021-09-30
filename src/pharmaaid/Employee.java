@@ -262,6 +262,25 @@ public class Employee extends AdminPanel{
         return rs;
     }
     
+    public ResultSet getEmployeeInfo(int userID,Connection con){
+        
+        ResultSet rs=null;
+        
+        try {    
+            String infoSQL="select EmployeeID,Emp_Name,Emp_Type,DateOfJoin,ResignDate,Salary from Employee where UserID = ?";
+            PreparedStatement infos=con.prepareStatement(infoSQL);
+            infos.setInt(1, userID);
+            
+            rs=infos.executeQuery();
+            
+            return rs;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
+    
     
     public void closeDatabase(){
         try {

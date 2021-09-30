@@ -26,6 +26,20 @@ public class idGenarate {
         return custID+ran;
     }
     
+    public int SaleID(){
+        Random rand=new Random();
+        int saleID=300;
+        int ran=rand.nextInt(99);
+        return saleID+ran;
+    }
+    
+    public int OfflineCustID(){
+        Random rand=new Random();
+        int saleID=400;
+        int ran=rand.nextInt(99);
+        return saleID+ran;
+    }
+    
     public String employeeDetect(int empID){
         String emp_type="Staff";
         int detector=empID/1000;
