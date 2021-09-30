@@ -5,12 +5,15 @@
  */
 package InterFaces;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 import pharmaaid.*;
+import java.time.*;
+import java.util.Calendar;
 
 /**
  *
@@ -21,8 +24,8 @@ public class EmployeeSales extends javax.swing.JFrame {
     /**
      * Creates new form EmployeeSales
      */
-    int givenQTY;
-    int EmpID,CustID,row=1,saleID;
+    float givenQTY;
+    int EmpID,CustID,row=1,saleID,medID;
     String medName,company;
     float MG;
     Connection con;
@@ -51,7 +54,7 @@ public class EmployeeSales extends javax.swing.JFrame {
         body = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Medlist = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        sales = new javax.swing.JButton();
         Medicine = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -109,8 +112,13 @@ public class EmployeeSales extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(Medlist);
 
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton1.setText("Sale");
+        sales.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        sales.setText("Sale");
+        sales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salesActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("Medicine");
@@ -123,6 +131,11 @@ public class EmployeeSales extends javax.swing.JFrame {
 
         Search.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         Search.setText("SEARCH");
+        Search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchActionPerformed(evt);
+            }
+        });
 
         ALLMed.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         ALLMed.setText("ALL MEDICINE");
@@ -137,7 +150,7 @@ public class EmployeeSales extends javax.swing.JFrame {
 
             },
             new String [] {
-                "SaleID", "CustID", "MedicineName", "Qty", "Price", "Rate", "SaleDate"
+                "SaleID", "CustID", "EmpID", "MedicineName", "Qty", "Price", "Rate", "SaleDate"
             }
         ));
         jScrollPane2.setViewportView(SalesRecord);
@@ -212,7 +225,7 @@ public class EmployeeSales extends javax.swing.JFrame {
                         .addGap(43, 43, 43)
                         .addComponent(desQTY, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(190, 190, 190)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(sales, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bodyLayout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,22 +265,18 @@ public class EmployeeSales extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(bodyLayout.createSequentialGroup()
-                        .addGroup(bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(desQTY, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(7, 7, 7)))
+                    .addComponent(sales, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(desQTY, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(4, 4, 4)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(bodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(bodyLayout.createSequentialGroup()
-                        .addComponent(Total, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(5, 5, 5)))
+                    .addComponent(Total, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addContainerGap())
@@ -294,19 +303,14 @@ public class EmployeeSales extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void MedlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MedlistMouseClicked
-        idGenarate id=new idGenarate();
-        DefaultTableModel model = (DefaultTableModel) Medlist.getModel();
-        DefaultTableModel model2 = (DefaultTableModel) SalesRecord.getModel();
+ 
         int index=Medlist.getSelectedRow();
-        
-        this.saleID=id.SaleID();
-        desiredQTY=Float.parseFloat(desQTY.getText());
-        float mrp=Float.parseFloat(Medlist.getValueAt(index, 8).toString());
-        rate=mrp*desiredQTY;
-        
-        System.out.println(rate);
-        System.out.println(this.CustID);
-        
+        givenQTY=Float.parseFloat(Medlist.getValueAt(index, 6).toString());
+        medID=Integer.parseInt(Medlist.getValueAt(index, 0).toString());
+//        this.saleID=id.SaleID();
+//        desiredQTY=Float.parseFloat(desQTY.getText());
+//        float mrp=Float.parseFloat(Medlist.getValueAt(index, 8).toString());
+//        rate=mrp*desiredQTY;
     }//GEN-LAST:event_MedlistMouseClicked
 
     private void NewSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewSaleActionPerformed
@@ -321,7 +325,7 @@ public class EmployeeSales extends javax.swing.JFrame {
         }
         
         DefaultTableModel model2 = (DefaultTableModel) SalesRecord.getModel();
-        int srowCount=model.getRowCount();
+        int srowCount=model2.getRowCount();
         for(int i=srowCount-1;i>=0;i--){
             model2.removeRow(i);
         }
@@ -329,6 +333,7 @@ public class EmployeeSales extends javax.swing.JFrame {
         Medicine.setText("");
         companyName.setText("");
         mg.setText("");
+        Total.setText("");
     }//GEN-LAST:event_NewSaleActionPerformed
 
     private void ALLMedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ALLMedActionPerformed
@@ -339,10 +344,51 @@ public class EmployeeSales extends javax.swing.JFrame {
         try {
             con.close();
             this.setVisible(false);
+            Login log=new Login();
+            log.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeSales.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void salesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesActionPerformed
+        idGenarate id=new idGenarate();
+        Medicine med=new Medicine();
+        Sale sale=new Sale();
+        int index=Medlist.getSelectedRow();
+        
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.HOUR_OF_DAY, 0);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
+        String currentDate=formatter.format(today.getTime());
+        
+        desiredQTY=Float.parseFloat(desQTY.getText());
+        
+        if(givenQTY>desiredQTY && !desQTY.getText().isEmpty()){
+            this.saleID=id.SaleID();
+            float mrp=Float.parseFloat(Medlist.getValueAt(index, 8).toString());
+            rate=mrp*desiredQTY;
+            medName=Medlist.getValueAt(index, 1).toString();
+            givenQTY=givenQTY-desiredQTY;
+            
+            
+            sale.salesInsert(saleID, EmpID, CustID, medName, (int)desiredQTY, mrp, rate, currentDate, con);
+            med.medicineUpdate(medID, (int)givenQTY, con);
+            total=sale.getTotalCurrentSale(CustID, con);
+            showCurrentSales();
+            Total.setText(Float.toString(total));
+//            System.out.println(rate);
+//            System.out.println(this.CustID);
+//            System.out.println(currentDate);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Not enough in stock");
+        }
+    }//GEN-LAST:event_salesActionPerformed
+
+    private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
+        
+    }//GEN-LAST:event_SearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -385,6 +431,12 @@ public class EmployeeSales extends javax.swing.JFrame {
         Medlist.setModel(DbUtils.resultSetToTableModel(rs));
     }
     
+    private void showCurrentSales(){
+       Sale sale=new Sale();
+       rs=sale.showCurrntSale(CustID, con);
+       SalesRecord.setModel(DbUtils.resultSetToTableModel(rs));
+    }
+    
     public void getCurrentEmpID(int userID){
         try {
             Employee emp=new Employee();
@@ -413,7 +465,6 @@ public class EmployeeSales extends javax.swing.JFrame {
     private javax.swing.JTextField companyName;
     private javax.swing.JTextField desQTY;
     private javax.swing.JPanel head;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -426,5 +477,6 @@ public class EmployeeSales extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField mg;
+    private javax.swing.JButton sales;
     // End of variables declaration//GEN-END:variables
 }

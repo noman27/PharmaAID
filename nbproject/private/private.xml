@@ -3,32 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/InterFaces/SupplyAdd.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/InterFaces/EmployeeDash.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/InterFaces/CompanyList.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/InterFaces/Login.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/InterFaces/EmployeeManage.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/pharmaaid/PharmaAID.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/pharmaaid/EmployeeInfos.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/InterFaces/AddnewContact.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/pharmaaid/Customer.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/pharmaaid/LoginWorks.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/pharmaaid/Supply.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/pharmaaid/idGenarate.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/pharmaaid/JDBCConnection.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/InterFaces/Sales.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/InterFaces/GenMedlist.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/pharmaaid/Employee.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/InterFaces/EmployeeContacts.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/InterFaces/CustomerReg.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/InterFaces/AdminDash.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/InterFaces/CustomerDash.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/InterFaces/EmployeeList.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/InterFaces/OwnerDash.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/InterFaces/UserDashboard.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/InterFaces/MedicineDashboard.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/InterFaces/AdminAdder.java</file>
-            <file>file:/D:/3.1/Database%20Lab(CSE%203104)/Application/PharmaAID/src/InterFaces/UsersList.java</file>
+            <file>file:/D:/Study/3.1/DATABASE/PROJECT/PharmaAID_Github/PharmaAID/src/pharmaaid/PharmaAID.java</file>
+            <file>file:/D:/Study/3.1/DATABASE/PROJECT/PharmaAID_Github/PharmaAID/src/InterFaces/MedicineDashboard.java</file>
+            <file>file:/D:/Study/3.1/DATABASE/PROJECT/PharmaAID_Github/PharmaAID/src/InterFaces/EmployeeSales.java</file>
+            <file>file:/D:/Study/3.1/DATABASE/PROJECT/PharmaAID_Github/PharmaAID/src/pharmaaid/idGenarate.java</file>
+            <file>file:/D:/Study/3.1/DATABASE/PROJECT/PharmaAID_Github/PharmaAID/src/InterFaces/Login.java</file>
+            <file>file:/D:/Study/3.1/DATABASE/PROJECT/PharmaAID_Github/PharmaAID/src/InterFaces/GenMedlist.java</file>
+            <file>file:/D:/Study/3.1/DATABASE/PROJECT/PharmaAID_Github/PharmaAID/src/pharmaaid/Employee.java</file>
         </group>
     </open-files>
 </project-private>
