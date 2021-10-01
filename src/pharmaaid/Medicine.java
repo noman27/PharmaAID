@@ -69,7 +69,7 @@ public class Medicine {
     public ResultSet searchMedicine(String name,String company,float mg,Connection con){
         ResultSet rs=null;
         try {
-            String searchSQL="select * from Medicine where  (Mg="+mg+") AND (MedicineName LIKE '"+name+"%') OR (Company LIKE '"+company+"%')";
+            String searchSQL="select * from Medicine where  (Mg="+mg+") AND ((MedicineName LIKE '"+name+"%') OR (Company LIKE '"+company+"%'))";
             Statement stmt=con.createStatement();
             rs=stmt.executeQuery(searchSQL);
             return rs;
@@ -82,7 +82,7 @@ public class Medicine {
     public ResultSet searchMedicine(Connection con){
         ResultSet rs=null;
         try {
-            String searchSQL="select * from Medicine";
+            String searchSQL="select * from Medicine where Exp_Date > GETDATE() order by Exp_Date";
             Statement stmt=con.createStatement();
             rs=stmt.executeQuery(searchSQL);
             return rs;

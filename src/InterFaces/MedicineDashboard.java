@@ -41,7 +41,7 @@ public class MedicineDashboard extends javax.swing.JFrame {
         try{
             connection = DriverManager.getConnection(url, user, password);
             statement = connection.createStatement();
-            resultset = statement.executeQuery("select * from Medicine");
+            resultset = statement.executeQuery("select * from Medicine where Exp_Date > GETDATE() order by Exp_Date");
             medicineInfo.setModel(DbUtils.resultSetToTableModel(resultset));
         }
         catch(SQLException e) {
@@ -77,6 +77,9 @@ public class MedicineDashboard extends javax.swing.JFrame {
         deleteMed = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         medPrice = new javax.swing.JTextField();
+        ExpireWithinMonth = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -153,6 +156,24 @@ public class MedicineDashboard extends javax.swing.JFrame {
 
         jLabel5.setText("Price");
 
+        ExpireWithinMonth.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        ExpireWithinMonth.setText("Will Expire Soon");
+        ExpireWithinMonth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExpireWithinMonthActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Medicines");
+
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jButton1.setText("Expired");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -169,25 +190,32 @@ public class MedicineDashboard extends javax.swing.JFrame {
                                 .addComponent(medicineList, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(31, 31, 31)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ExpireWithinMonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(medID, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                                     .addComponent(medName)
                                     .addComponent(medCompany))
-                                .addGap(325, 325, 325)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(medQty)
-                                    .addComponent(medMgML, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                                    .addComponent(medPrice))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(325, 325, 325)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel5))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(medQty)
+                                            .addComponent(medMgML, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                                            .addComponent(medPrice)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -224,7 +252,13 @@ public class MedicineDashboard extends javax.swing.JFrame {
                     .addComponent(medCompany, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(medMgML, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ExpireWithinMonth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -321,6 +355,30 @@ public class MedicineDashboard extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_backActionPerformed
 
+    private void ExpireWithinMonthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExpireWithinMonthActionPerformed
+        try{
+            connection = DriverManager.getConnection(url, user, password);
+            statement = connection.createStatement();
+            resultset = statement.executeQuery("select * from Medicine where Exp_Date < DATEADD(month,2,GETDATE())");
+            medicineInfo.setModel(DbUtils.resultSetToTableModel(resultset));
+        }
+        catch(SQLException e) {
+            
+        }
+    }//GEN-LAST:event_ExpireWithinMonthActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try{
+            connection = DriverManager.getConnection(url, user, password);
+            statement = connection.createStatement();
+            resultset = statement.executeQuery("select * from Medicine where Exp_Date < GETDATE()");
+            medicineInfo.setModel(DbUtils.resultSetToTableModel(resultset));
+        }
+        catch(SQLException e) {
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -363,14 +421,17 @@ public class MedicineDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ExpireWithinMonth;
     private javax.swing.JButton addMed;
     private javax.swing.JButton back;
     private javax.swing.JButton deleteMed;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField medCompany;

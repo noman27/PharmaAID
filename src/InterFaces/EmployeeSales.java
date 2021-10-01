@@ -387,7 +387,18 @@ public class EmployeeSales extends javax.swing.JFrame {
     }//GEN-LAST:event_salesActionPerformed
 
     private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
-        
+        if(Medicine.getText().isEmpty() && companyName.getText().isEmpty() && mg.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Medicine name,company name and Mg Required");
+        }
+        else{
+           medName=Medicine.getText();
+           company=companyName.getText();
+           MG=Float.parseFloat(mg.getText());
+           
+           Medicine med=new Medicine();
+           rs=med.searchMedicine(medName, company, MG, con);
+           Medlist.setModel(DbUtils.resultSetToTableModel(rs));
+        }
     }//GEN-LAST:event_SearchActionPerformed
 
     /**
