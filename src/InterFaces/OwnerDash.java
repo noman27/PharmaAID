@@ -344,7 +344,8 @@ public class OwnerDash extends javax.swing.JFrame {
     }//GEN-LAST:event_EmployeeListMouseClicked
 
     private void SalesRecordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SalesRecordMouseClicked
-        
+        Sales sal = new Sales ();
+        sal.setVisible(true);
     }//GEN-LAST:event_SalesRecordMouseClicked
 
     private void SupplyRecordsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SupplyRecordsMouseClicked

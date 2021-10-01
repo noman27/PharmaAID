@@ -10,6 +10,7 @@ public class Sale {
     }
     
     public void salesInsert(int saleID,int EmployeeID,int custID,String medname,int qty,float price,float rate,String saleDate,Connection con){
+        Date sale_date=Date.valueOf(saleDate);
         try {
             
             String saleSQL="insert into Sales(SaleID,EmployeeID,CustID,MedicineName,Qty,Price,Rate,Sale_Date)VALUES(?,?,?,?,?,?,?,?)";
@@ -21,7 +22,7 @@ public class Sale {
             sale.setInt(5, qty);
             sale.setFloat(6, price);
             sale.setFloat(7, rate);
-            sale.setString(8, saleDate);
+            sale.setDate(8, sale_date);
             sale.executeUpdate();
             
         } catch (SQLException ex) {
@@ -61,4 +62,109 @@ public class Sale {
         
         return Total;
     }
+    
+    public ResultSet getAllSale(Connection con){
+        ResultSet rs=null;
+        String saleSQL="select s.SaleID,d.Emp_Name,s.CustID,s.MedicineName,s.Qty,s.Price,s.Rate,s.Sale_Date from Sales s JOIN Employee d ON s.EmployeeID=d.EmployeeID";
+        try {
+            PreparedStatement pst=con.prepareStatement(saleSQL);
+            rs=pst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
+    
+    public ResultSet getAllSale(Connection con,String med){
+        ResultSet rs=null;
+        String saleSQL="select s.SaleID,d.Emp_Name,s.CustID,s.MedicineName,s.Qty,s.Price,s.Rate,s.Sale_Date from Sales s JOIN Employee d ON s.EmployeeID=d.EmployeeID where s.MedicineName = ?";
+        try {
+            PreparedStatement pst=con.prepareStatement(saleSQL);
+            pst.setString(1, med);
+            rs=pst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
+    
+    public ResultSet getTodaySale(Connection con){
+        ResultSet rs=null;
+        String saleSQL="select s.SaleID,d.Emp_Name,s.CustID,s.MedicineName,s.Qty,s.Price,s.Rate,s.Sale_Date from Sales s JOIN Employee d ON s.EmployeeID=d.EmployeeID where DATEDIFF(day,s.Sale_Date,GETDATE())=0";
+        try {
+            PreparedStatement pst=con.prepareStatement(saleSQL);
+            rs=pst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
+    
+    public ResultSet getTodaySale(Connection con,String Med){
+        ResultSet rs=null;
+        String saleSQL="select s.SaleID,d.Emp_Name,s.CustID,s.MedicineName,s.Qty,s.Price,s.Rate,s.Sale_Date from Sales s JOIN Employee d ON s.EmployeeID=d.EmployeeID where DATEDIFF(day,s.Sale_Date,GETDATE())=0 AND s.MedicineName = ?";
+        try {
+            PreparedStatement pst=con.prepareStatement(saleSQL);
+            pst.setString(1, Med);
+            rs=pst.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
+    
+    public float getTotal(Connection con){
+        float total=0;
+        ResultSet rs=null;
+        String sql="select SUM(Rate) as Total from Sales where DATEDIFF(day,Sale_Date,GETDATE())=0";
+        try {
+            PreparedStatement pst=con.prepareStatement(sql);
+            rs=pst.executeQuery();
+            if(rs.next()){
+                total=rs.getFloat("Total");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+    
+    public int getTotalQtyToday(Connection con,String med){
+        int total=0;
+        ResultSet rs=null;
+        String sql="select SUM(Qty) as Total from Sales where DATEDIFF(day,Sale_Date,GETDATE())=0 AND MedicineName = ?";
+        try {
+            PreparedStatement pst=con.prepareStatement(sql);
+            pst.setString(1, med);
+            rs=pst.executeQuery();
+            if(rs.next()){
+                total=rs.getInt("Total");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+    
+    public int getTotalQtyAll(Connection con,String med){
+        int total=0;
+        ResultSet rs=null;
+        String sql="select SUM(Qty) as Total from Sales where MedicineName = ?";
+        try {
+            PreparedStatement pst=con.prepareStatement(sql);
+            pst.setString(1, med);
+            rs=pst.executeQuery();
+            if(rs.next()){
+                total=rs.getInt("Total");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+    
 }
