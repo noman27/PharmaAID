@@ -1,6 +1,9 @@
 package pharmaaid;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -71,6 +74,41 @@ public class Sale {
             rs=pst.executeQuery();
             return rs;
         } catch (SQLException ex) {
+            Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
+    
+    public ResultSet getAllSale(Connection con,String Year,String Month){
+        ResultSet rs=null;
+        try {
+            
+            java.util.Date date = new SimpleDateFormat("MMMM").parse(Month);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            
+            String DAY;
+            int day=cal.get(Calendar.MONTH)+1;
+            if(day<10){
+                DAY="0"+Integer.toString(day);
+            }
+            else{
+                DAY=Integer.toString(day);
+            }
+            
+            String cratedate=Year+"-"+DAY+"-";
+           
+            String saleSQL="select s.SaleID,d.Emp_Name,s.CustID,s.MedicineName,s.Qty,s.Price,s.Rate,s.Sale_Date from Sales s JOIN Employee d ON s.EmployeeID=d.EmployeeID where s.Sale_Date LIKE '"+cratedate+"%'";
+            
+            try {
+                Statement stmt=con.createStatement();
+                rs=stmt.executeQuery(saleSQL);
+                return rs;
+            } catch (SQLException ex) {
+                Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        } catch (ParseException ex) {
             Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rs;
