@@ -8,6 +8,7 @@ import pharmaaid.*;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -21,6 +22,11 @@ public class EmployeeList extends javax.swing.JFrame {
      */
     Connection con;
     ResultSet rs;
+    int userID;
+    String name,type;
+    String doj,resign;
+    float salary;
+    
     public EmployeeList() {
         initComponents();
         JDBCConnection connect=new JDBCConnection();
@@ -45,8 +51,8 @@ public class EmployeeList extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         userTable = new javax.swing.JTable();
         userName = new javax.swing.JTextField();
-        userPhoneNo = new javax.swing.JTextField();
-        userEmail = new javax.swing.JTextField();
+        empSalary = new javax.swing.JTextField();
+        typ = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         dateOfJoin = new javax.swing.JTextField();
@@ -64,27 +70,32 @@ public class EmployeeList extends javax.swing.JFrame {
 
         ownerNameLabel.setText("Name       ");
 
-        phoneNo.setText("Phone No ");
+        phoneNo.setText("Salary");
 
-        eMail.setText("E-mail        ");
+        eMail.setText("Type");
 
         userTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Name", "Type", "Join Date", "Date of Resign", "Salary"
+                "ID", "Name", "Type", "Join Date", "Date of Resign", "Salary", "UserID"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        userTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userTableMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(userTable);
@@ -131,8 +142,8 @@ public class EmployeeList extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(userName, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                                    .addComponent(userPhoneNo)
-                                    .addComponent(userEmail))
+                                    .addComponent(empSalary)
+                                    .addComponent(typ))
                                 .addGap(215, 215, 215)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -175,13 +186,13 @@ public class EmployeeList extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(phoneNo)
-                    .addComponent(userPhoneNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(empSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(dateOfResign, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(eMail)
-                    .addComponent(userEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(typ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -197,7 +208,10 @@ public class EmployeeList extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateEmployeeListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEmployeeListActionPerformed
-        // TODO add your handling code here:
+        getAllValue();
+        Employee emp=new Employee();
+        emp.EmpUpdateInfo(userID, name, type, doj, resign, salary, con);
+        
     }//GEN-LAST:event_updateEmployeeListActionPerformed
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
@@ -209,6 +223,29 @@ public class EmployeeList extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_BackActionPerformed
 
+    private void userTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userTableMouseClicked
+        DefaultTableModel model = (DefaultTableModel) userTable.getModel();
+        int index = userTable.getSelectedRow();
+        userName.setText(model.getValueAt(index, 2).toString());
+        empSalary.setText(model.getValueAt(index, 6).toString());
+        typ.setText(model.getValueAt(index, 3).toString());
+        dateOfJoin.setText(model.getValueAt(index, 4).toString());
+        
+        if(model.getValueAt(index, 5)==null){
+            dateOfResign.setText("");
+        }else{
+            dateOfResign.setText(model.getValueAt(index, 5).toString());
+        }
+        userID=Integer.parseInt(model.getValueAt(index, 1).toString());
+    }//GEN-LAST:event_userTableMouseClicked
+    
+    private void getAllValue(){
+        name=userName.getText();
+        type=typ.getText();
+        doj=dateOfJoin.getText();
+        resign=dateOfResign.getText();
+        salary=Float.parseFloat(empSalary.getText());
+    }
     /**
      * @param args the command line arguments
      */
@@ -260,6 +297,7 @@ public class EmployeeList extends javax.swing.JFrame {
     private javax.swing.JTextField dateOfResign;
     private javax.swing.JButton deleteEmployee;
     private javax.swing.JLabel eMail;
+    private javax.swing.JTextField empSalary;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -267,10 +305,9 @@ public class EmployeeList extends javax.swing.JFrame {
     private javax.swing.JLabel ownerNameLabel;
     private javax.swing.JLabel phoneNo;
     private java.awt.TextArea textArea1;
+    private javax.swing.JTextField typ;
     private javax.swing.JButton updateEmployeeList;
-    private javax.swing.JTextField userEmail;
     private javax.swing.JTextField userName;
-    private javax.swing.JTextField userPhoneNo;
     private javax.swing.JTable userTable;
     // End of variables declaration//GEN-END:variables
 }

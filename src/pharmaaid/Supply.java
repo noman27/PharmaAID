@@ -1,5 +1,8 @@
 package pharmaaid;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class Supply {
@@ -72,6 +75,55 @@ public class Supply {
             rs=stmt.executeQuery(fullSQL);
             return rs;
         } catch (SQLException ex) {
+            Logger.getLogger(Supply.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
+    
+    public ResultSet supplyFullRecord(Connection con,String name){
+        ResultSet rs=null;
+        Statement stmt;
+        try {    
+            String fullSQL="select d.SupplyID,f.MedicineName,c.Company_name,d.Batch_No,d.Qty,d.SalesMan,d.Supp_Date from Medicine f JOIN Supply d ON f.MedID=d.MedID JOIN Company c ON c.CompanyID=d.CompanyID where d.SalesMan LIKE '"+name+"%'";
+            stmt=con.createStatement();
+            rs=stmt.executeQuery(fullSQL);
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(Supply.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
+    
+    public ResultSet supplyFullRecord(Connection con,String Year,String Month){
+        ResultSet rs=null;
+        try {
+            java.util.Date date = new SimpleDateFormat("MMMM").parse(Month);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            
+            String DAY;
+            int day=cal.get(Calendar.MONTH)+1;
+            if(day<10){
+                DAY="0"+Integer.toString(day);
+            }
+            else{
+                DAY=Integer.toString(day);
+            }
+            
+            String cratedate=Year+"-"+DAY+"-";
+            System.out.println(cratedate);
+            
+            Statement stmt;
+            try {
+                String fullSQL="select d.SupplyID,f.MedicineName,c.Company_name,d.Batch_No,d.Qty,d.SalesMan,d.Supp_Date from Medicine f JOIN Supply d ON f.MedID=d.MedID JOIN Company c ON c.CompanyID=d.CompanyID where d.Supp_Date LIKE '"+cratedate+"%'";
+                stmt=con.createStatement();
+                rs=stmt.executeQuery(fullSQL);
+                return rs;
+            } catch (SQLException ex) {
+                Logger.getLogger(Supply.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        } catch (ParseException ex) {
             Logger.getLogger(Supply.class.getName()).log(Level.SEVERE, null, ex);
         }
         return rs;

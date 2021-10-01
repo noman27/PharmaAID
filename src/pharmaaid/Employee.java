@@ -248,7 +248,7 @@ public class Employee extends AdminPanel{
         ResultSet rs=null;
         
         try {    
-            String infoSQL="select EmployeeID,Emp_Name,Emp_Type,DateOfJoin,ResignDate,Salary from Employee";
+            String infoSQL="select * from Employee";
             PreparedStatement infos=con.prepareStatement(infoSQL);
             //infos.setString(1, empType);
             
