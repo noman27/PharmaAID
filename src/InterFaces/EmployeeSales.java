@@ -366,8 +366,10 @@ public class EmployeeSales extends javax.swing.JFrame {
         
         if(givenQTY>desiredQTY && !desQTY.getText().isEmpty()){
             this.saleID=id.SaleID();
-            float mrp=Float.parseFloat(Medlist.getValueAt(index, 8).toString());
-            rate=mrp*desiredQTY;
+//            float mrp=Math.round(Float.parseFloat(Medlist.getValueAt(index, 8).toString()));
+//            rate=Math.round(mrp*desiredQTY);
+            float mrp=round(Float.parseFloat(Medlist.getValueAt(index, 8).toString()),2);
+            rate=round(mrp*desiredQTY, 2);
             medName=Medlist.getValueAt(index, 1).toString();
             givenQTY=givenQTY-desiredQTY;
             
@@ -462,6 +464,16 @@ public class EmployeeSales extends javax.swing.JFrame {
         }
     }
     
+    public static float round(float value, int places) {
+        if (places < 0) {
+            throw new IllegalArgumentException();
+        }
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (float) tmp / factor;
+    }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
