@@ -50,7 +50,7 @@ public class Customer extends AdminPanel{
     public void CustInsert(String userName,String name,String address,String email,String contact){
         int uid=userIDGet(userName);
         
-        if(uid==0){
+        if(uid!=0){
             try {
             idGenarate custID=new idGenarate();
             int id=custID.customerID();
@@ -116,6 +116,23 @@ public class Customer extends AdminPanel{
             Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+    }
+    
+    public int CustIDget(int userID){
+        int custid=0;
+        try {
+            String sql="select CustomerID from Customer where UserID = ?";
+            PreparedStatement pst=custCon.prepareStatement(sql);
+            pst.setInt(1, userID);
+            resultSet=pst.executeQuery();
+            if(resultSet.next()){
+                custid=resultSet.getInt("CustomerID");
+                return custid;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return custid;
     }
     
     public void closeDatabase(){

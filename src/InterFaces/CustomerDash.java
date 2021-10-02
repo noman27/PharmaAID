@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package InterFaces;
-
+import pharmaaid.*;
 /**
  *
  * @author USER
@@ -313,7 +313,10 @@ public class CustomerDash extends javax.swing.JFrame {
     }
     
     public void setUserID(int id){
-        currentUserID=id;
+        Customer cust=new Customer();
+        currentUserID=cust.CustIDget(id);
+        cust.closeDatabase();
+        System.out.println(currentUserID);
     }
     public void getLogObject(Login log){
         this.log=log;
