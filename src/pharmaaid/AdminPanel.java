@@ -115,6 +115,19 @@ public class AdminPanel {
         return rs;
     }
     
+    public ResultSet getuser(int uid){
+        rs=null;
+        try {
+            String sql="select * from Users where UserID = "+uid;
+            Statement stmt=Admincon.createStatement();
+            rs=stmt.executeQuery(sql);
+            return rs;
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return rs;
+    }
+    
     public void closeDatabase(){
         try {
             Admincon.close();

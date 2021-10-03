@@ -14,6 +14,7 @@ public class OwnerDash extends javax.swing.JFrame {
     /**
      * Creates new form OwnerDash
      */
+    int id;
     public OwnerDash() {
         initComponents();
     }
@@ -79,6 +80,11 @@ public class OwnerDash extends javax.swing.JFrame {
         });
 
         jLabel1.setText("       USER    DETAILS");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout UserDetailsLayout = new javax.swing.GroupLayout(UserDetails);
         UserDetails.setLayout(UserDetailsLayout);
@@ -329,7 +335,9 @@ public class OwnerDash extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void UserDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserDetailsMouseClicked
-        
+        UserDashboard.getID(id);
+        UserDashboard ud=new UserDashboard();
+        ud.setVisible(true);
     }//GEN-LAST:event_UserDetailsMouseClicked
 
     private void MedicineListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MedicineListMouseClicked
@@ -366,6 +374,10 @@ public class OwnerDash extends javax.swing.JFrame {
         complist.setVisible(true);
     }//GEN-LAST:event_CompanylistMouseClicked
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -400,7 +412,12 @@ public class OwnerDash extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    public void setID(int id){
+        this.id=id;
+        System.out.println(this.id);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Body;
     private javax.swing.JPanel Companylist;

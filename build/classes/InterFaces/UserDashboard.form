@@ -2,7 +2,7 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -34,17 +34,21 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="userID" max="32767" attributes="0"/>
-                          <Component id="userName" max="32767" attributes="0"/>
-                          <Component id="contactNo" alignment="0" max="32767" attributes="0"/>
-                          <Component id="email" alignment="0" max="32767" attributes="0"/>
-                          <Component id="dateOfJoining" alignment="0" pref="248" max="32767" attributes="0"/>
+                          <Component id="userID" pref="246" max="32767" attributes="0"/>
+                          <Component id="utype" alignment="0" max="32767" attributes="0"/>
+                          <Component id="Password" alignment="0" max="32767" attributes="0"/>
+                          <Component id="cPassword" alignment="0" max="32767" attributes="0"/>
+                          <Component id="userName" alignment="0" max="32767" attributes="0"/>
+                          <Component id="realName" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -65,7 +69,12 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="user" min="-2" pref="43" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="realName" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="userID" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -78,19 +87,19 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="contactNo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="utype" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="email" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Password" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="dateOfJoining" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cPassword" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="61" max="32767" attributes="0"/>
+              <EmptySpace pref="47" max="32767" attributes="0"/>
               <Component id="updateUserData" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="exitUser" min="-2" max="-2" attributes="0"/>
@@ -116,22 +125,22 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Name:"/>
+        <Property name="text" type="java.lang.String" value="User Name"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Contact No:"/>
+        <Property name="text" type="java.lang.String" value="User Type"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="E-mail:"/>
+        <Property name="text" type="java.lang.String" value="Password"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Date of Joining:"/>
+        <Property name="text" type="java.lang.String" value="Conf Password"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="userID">
@@ -139,35 +148,39 @@
         <Property name="text" type="java.lang.String" value="userID"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="userName">
+    <Component class="javax.swing.JLabel" name="utype">
       <Properties>
-        <Property name="text" type="java.lang.String" value="userName"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="contactNo">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="contactNo"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="email">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="email"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="dateOfJoining">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="dateOfJoining"/>
+        <Property name="text" type="java.lang.String" value="type"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="updateUserData">
       <Properties>
         <Property name="text" type="java.lang.String" value="Update"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateUserDataActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="exitUser">
       <Properties>
         <Property name="text" type="java.lang.String" value="Exit"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exitUserActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="Password">
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="cPassword">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel6">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Name"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="realName">
+    </Component>
+    <Component class="javax.swing.JTextField" name="userName">
     </Component>
   </SubComponents>
 </Form>

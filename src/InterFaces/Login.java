@@ -202,6 +202,7 @@ public class Login extends javax.swing.JFrame {
                 
                 if(employee.getEmpType(uID).equals("Owner")){
                     OwnerDash od=new OwnerDash();
+                    od.setID(uID);
                     od.setTitle("PharmaAID | Owner Dashboard");
                     this.hide();
                     od.setVisible(true);
