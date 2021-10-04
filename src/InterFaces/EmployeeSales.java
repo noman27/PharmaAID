@@ -24,6 +24,11 @@ public class EmployeeSales extends javax.swing.JFrame {
     /**
      * Creates new form EmployeeSales
      */
+    int id;
+    String loginTime;
+    String loginDate;
+    String logOutTime;
+    
     float givenQTY;
     int EmpID,CustID,row=1,saleID,medID;
     String medName,company;
@@ -38,6 +43,8 @@ public class EmployeeSales extends javax.swing.JFrame {
         con=connect.getConnection();
         idGenarate id=new idGenarate();
         this.CustID=id.OfflineCustID();
+        
+        getTodayDateTime();
     }
 
     /**
@@ -76,7 +83,10 @@ public class EmployeeSales extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        head.setBackground(new java.awt.Color(0, 204, 204));
+
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Sales");
 
@@ -97,6 +107,11 @@ public class EmployeeSales extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
+        body.setBackground(new java.awt.Color(255, 255, 255));
+        body.setForeground(new java.awt.Color(255, 255, 255));
+
+        Medlist.setBackground(new java.awt.Color(204, 255, 204));
+        Medlist.setForeground(new java.awt.Color(0, 0, 0));
         Medlist.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -112,7 +127,9 @@ public class EmployeeSales extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(Medlist);
 
+        sales.setBackground(new java.awt.Color(0, 204, 102));
         sales.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        sales.setForeground(new java.awt.Color(0, 0, 0));
         sales.setText("Sale");
         sales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,15 +138,21 @@ public class EmployeeSales extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Medicine");
 
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Company");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("MG");
 
+        Search.setBackground(new java.awt.Color(0, 204, 204));
         Search.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        Search.setForeground(new java.awt.Color(0, 0, 0));
         Search.setText("SEARCH");
         Search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,7 +160,9 @@ public class EmployeeSales extends javax.swing.JFrame {
             }
         });
 
+        ALLMed.setBackground(new java.awt.Color(0, 153, 51));
         ALLMed.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        ALLMed.setForeground(new java.awt.Color(0, 0, 0));
         ALLMed.setText("ALL MEDICINE");
         ALLMed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,6 +170,7 @@ public class EmployeeSales extends javax.swing.JFrame {
             }
         });
 
+        SalesRecord.setBackground(new java.awt.Color(204, 255, 204));
         SalesRecord.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -156,9 +182,12 @@ public class EmployeeSales extends javax.swing.JFrame {
         jScrollPane2.setViewportView(SalesRecord);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Total:");
 
+        jButton4.setBackground(new java.awt.Color(0, 204, 204));
         jButton4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(0, 0, 0));
         jButton4.setText("LOG OUT");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,8 +196,11 @@ public class EmployeeSales extends javax.swing.JFrame {
         });
 
         Total.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        Total.setForeground(new java.awt.Color(0, 0, 0));
 
+        NewSale.setBackground(new java.awt.Color(0, 204, 51));
         NewSale.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        NewSale.setForeground(new java.awt.Color(0, 0, 0));
         NewSale.setText("NEW SALE");
         NewSale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,14 +209,17 @@ public class EmployeeSales extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("MEDICINE TABLE");
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("SALE TABLE");
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Qty");
 
         javax.swing.GroupLayout bodyLayout = new javax.swing.GroupLayout(body);
@@ -342,6 +377,7 @@ public class EmployeeSales extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         try {
+            insertLogs();
             con.close();
             this.setVisible(false);
             Login log=new Login();
@@ -361,30 +397,33 @@ public class EmployeeSales extends javax.swing.JFrame {
         today.set(Calendar.HOUR_OF_DAY, 0);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
         String currentDate=formatter.format(today.getTime());
-        
-        desiredQTY=Float.parseFloat(desQTY.getText());
-        
-        if(givenQTY>desiredQTY && !desQTY.getText().isEmpty()){
-            this.saleID=id.SaleID();
-//            float mrp=Math.round(Float.parseFloat(Medlist.getValueAt(index, 8).toString()));
-//            rate=Math.round(mrp*desiredQTY);
-            float mrp=round(Float.parseFloat(Medlist.getValueAt(index, 8).toString()),2);
-            rate=round(mrp*desiredQTY, 2);
-            medName=Medlist.getValueAt(index, 1).toString();
-            givenQTY=givenQTY-desiredQTY;
-            
-            
-            sale.salesInsert(saleID, EmpID, CustID, medName, (int)desiredQTY, mrp, rate, currentDate, con);
-            med.medicineUpdate(medID, (int)givenQTY, con);
-            total=sale.getTotalCurrentSale(CustID, con);
-            showCurrentSales();
-            Total.setText(Float.toString(total));
-//            System.out.println(rate);
-//            System.out.println(this.CustID);
-//            System.out.println(currentDate);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Not enough in stock");
+        if(!desQTY.getText().isEmpty()){
+            desiredQTY=Float.parseFloat(desQTY.getText());
+
+            if(givenQTY>desiredQTY){
+                this.saleID=id.SaleID();
+    //            float mrp=Math.round(Float.parseFloat(Medlist.getValueAt(index, 8).toString()));
+    //            rate=Math.round(mrp*desiredQTY);
+                float mrp=round(Float.parseFloat(Medlist.getValueAt(index, 8).toString()),2);
+                rate=round(mrp*desiredQTY, 2);
+                medName=Medlist.getValueAt(index, 1).toString();
+                givenQTY=givenQTY-desiredQTY;
+
+
+                sale.salesInsert(saleID, EmpID, CustID, medName, (int)desiredQTY, mrp, rate, currentDate, con);
+                med.medicineUpdate(medID, (int)givenQTY, con);
+                total=sale.getTotalCurrentSale(CustID, con);
+                showCurrentSales();
+                Total.setText(Float.toString(total));
+    //            System.out.println(rate);
+    //            System.out.println(this.CustID);
+    //            System.out.println(currentDate);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Not enough in stock");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Qty field is empty");
         }
     }//GEN-LAST:event_salesActionPerformed
 
@@ -475,6 +514,29 @@ public class EmployeeSales extends javax.swing.JFrame {
         return (float) tmp / factor;
     }
     
+    private void getTodayDateTime(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
+        SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        loginTime=dateFormat.format(calendar.getTime());
+        loginDate=dateFormat2.format(calendar.getTime());
+        System.out.println(loginTime);
+        System.out.println(loginDate);
+    }
+    
+    private void insertLogs(){
+        Logs log=new Logs();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
+        Calendar calendar = Calendar.getInstance();
+        logOutTime=dateFormat.format(calendar.getTime());
+        log.insertLoginLogout(con, id, loginTime, logOutTime, loginDate);
+        
+    }
+    
+    public void setID(int id){
+        this.id=id;
+        System.out.println(this.id);
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ALLMed;

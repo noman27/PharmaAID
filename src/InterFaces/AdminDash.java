@@ -5,6 +5,13 @@
  */
 package InterFaces;
 
+import java.sql.*;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import pharmaaid.*;
+import net.proteanit.sql.DbUtils;
+
 /**
  *
  * @author USER
@@ -14,8 +21,12 @@ public class AdminDash extends javax.swing.JFrame {
     /**
      * Creates new form AdminDash
      */
+    int id;
+    Connection con;
+    ResultSet rs;
     public AdminDash() {
         initComponents();
+        showLogTable();
     }
 
     /**
@@ -29,12 +40,19 @@ public class AdminDash extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         ADDEMP = new javax.swing.JButton();
-        Logout = new javax.swing.JButton();
         UpdateAdmin = new javax.swing.JButton();
         UserManage = new javax.swing.JButton();
+        Logout = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        logtable = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(0, 204, 102));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -57,6 +75,9 @@ public class AdminDash extends javax.swing.JFrame {
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        ADDEMP.setBackground(new java.awt.Color(0, 204, 204));
         ADDEMP.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         ADDEMP.setText("ADD EMPLOYEE");
         ADDEMP.addActionListener(new java.awt.event.ActionListener() {
@@ -65,16 +86,16 @@ public class AdminDash extends javax.swing.JFrame {
             }
         });
 
-        Logout.setText("Log Out");
-        Logout.addActionListener(new java.awt.event.ActionListener() {
+        UpdateAdmin.setBackground(new java.awt.Color(0, 204, 204));
+        UpdateAdmin.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        UpdateAdmin.setText("UPDATE ADMIN");
+        UpdateAdmin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogoutActionPerformed(evt);
+                UpdateAdminActionPerformed(evt);
             }
         });
 
-        UpdateAdmin.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        UpdateAdmin.setText("UPDATE ADMIN");
-
+        UserManage.setBackground(new java.awt.Color(0, 204, 204));
         UserManage.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         UserManage.setText("USER MANAGE");
         UserManage.addActionListener(new java.awt.event.ActionListener() {
@@ -83,37 +104,84 @@ public class AdminDash extends javax.swing.JFrame {
             }
         });
 
+        Logout.setBackground(new java.awt.Color(255, 0, 51));
+        Logout.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        Logout.setText("LOG OUT");
+        Logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutActionPerformed(evt);
+            }
+        });
+
+        logtable.setBackground(new java.awt.Color(204, 255, 204));
+        logtable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Type", "Date", "Login", "Logout"
+            }
+        ));
+        jScrollPane1.setViewportView(logtable);
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("LOG TABLE");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(UpdateAdmin, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(UserManage, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ADDEMP, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(358, 358, 358)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(ADDEMP, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(UpdateAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(UserManage, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Logout, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Logout)
-                .addGap(158, 158, 158))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(138, 138, 138)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ADDEMP, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
-                    .addComponent(UpdateAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(71, 71, 71)
-                .addComponent(UserManage, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ADDEMP, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(UserManage, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(67, 67, 67)
-                .addComponent(UpdateAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
-                .addComponent(Logout)
-                .addGap(65, 65, 65))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -127,16 +195,27 @@ public class AdminDash extends javax.swing.JFrame {
     }//GEN-LAST:event_ADDEMPActionPerformed
 
     private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
-        this.setVisible(false);
-        Login login=new Login();
-        login.setTitle("Login");
-        login.setVisible(true);
+        try {
+            con.close();
+            this.setVisible(false);
+            Login login=new Login();
+            login.setTitle("Login");
+            login.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDash.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_LogoutActionPerformed
 
     private void UserManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserManageActionPerformed
         UsersList use=new UsersList();
         use.setVisible(true);
     }//GEN-LAST:event_UserManageActionPerformed
+
+    private void UpdateAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateAdminActionPerformed
+        UserDashboard.getID(id);
+        UserDashboard ud=new UserDashboard();
+        ud.setVisible(true);
+    }//GEN-LAST:event_UpdateAdminActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,6 +251,20 @@ public class AdminDash extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void setID(int id){
+        this.id=id;
+        System.out.println(this.id);
+    }
+    
+    private void showLogTable(){
+        JDBCConnection connection =new JDBCConnection();
+        con=connection.getConnection();
+        Logs log= new Logs();
+        rs=log.getLogs(con);
+        logtable.setModel(DbUtils.resultSetToTableModel(rs));
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ADDEMP;
@@ -179,6 +272,10 @@ public class AdminDash extends javax.swing.JFrame {
     private javax.swing.JButton UpdateAdmin;
     private javax.swing.JButton UserManage;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable logtable;
     // End of variables declaration//GEN-END:variables
 }

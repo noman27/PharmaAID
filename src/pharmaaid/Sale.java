@@ -205,4 +205,38 @@ public class Sale {
         return total;
     }
     
+    public int TotalWeekSales(Connection con){
+        int total=0;
+        ResultSet rs=null;
+        String sql="select COUNT(SaleID) as weekly from Sales where DATEDIFF(day,Sale_Date,GETDATE()) between 0 and 7";
+        try {
+            PreparedStatement pst=con.prepareStatement(sql);
+            
+            rs=pst.executeQuery();
+            if(rs.next()){
+                total=rs.getInt("weekly");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return total;
+    }
+    
+    public String lowestMedicine(Connection con){
+        String mad="";
+        ResultSet rs=null;
+        String sql="select MedicineName from Medicine where Qty=(select MIN(Qty) from Medicine where Exp_Date>GETDATE())";
+        try {
+            PreparedStatement pst=con.prepareStatement(sql);
+            
+            rs=pst.executeQuery();
+            if(rs.next()){
+                mad=rs.getString("MedicineName");
+                return mad;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Sale.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mad;
+    }
 }

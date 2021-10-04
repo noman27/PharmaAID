@@ -281,6 +281,28 @@ public class Employee extends AdminPanel{
         return rs;
     }
     
+    public int totalEmpget(){
+        
+        int count=0;
+        
+        try {
+            String getuidSQL="select count(EmployeeID) as TotalEmp from Employee where Emp_Type='Staff' AND ResignDate is null";
+            PreparedStatement getID=EmpCon.prepareStatement(getuidSQL);
+            resultSet=getID.executeQuery();
+            
+            if(resultSet.next()){
+                count=resultSet.getInt("TotalEmp");
+                //System.out.println("Customer user id is="+id);
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+    
+    
     
     public void closeDatabase(){
         try {
