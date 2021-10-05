@@ -57,9 +57,7 @@ public class EmployeeList extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         dateOfJoin = new javax.swing.JTextField();
         dateOfResign = new javax.swing.JTextField();
-        addEmployee = new javax.swing.JButton();
         updateEmployeeList = new javax.swing.JButton();
-        deleteEmployee = new javax.swing.JButton();
         Back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -104,9 +102,6 @@ public class EmployeeList extends javax.swing.JFrame {
 
         jLabel2.setText("Date of Resign");
 
-        addEmployee.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        addEmployee.setText("ADD");
-
         updateEmployeeList.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         updateEmployeeList.setText("UPDATE");
         updateEmployeeList.addActionListener(new java.awt.event.ActionListener() {
@@ -114,9 +109,6 @@ public class EmployeeList extends javax.swing.JFrame {
                 updateEmployeeListActionPerformed(evt);
             }
         });
-
-        deleteEmployee.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        deleteEmployee.setText("DELETE");
 
         Back.setText("Back");
         Back.addActionListener(new java.awt.event.ActionListener() {
@@ -153,12 +145,8 @@ public class EmployeeList extends javax.swing.JFrame {
                                     .addComponent(dateOfResign, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(dateOfJoin, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(138, 138, 138)
-                                .addComponent(addEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(87, 87, 87)
-                                .addComponent(updateEmployeeList, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(101, 101, 101)
-                                .addComponent(deleteEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(365, 365, 365)
+                                .addComponent(updateEmployeeList, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -196,10 +184,7 @@ public class EmployeeList extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(updateEmployeeList)
-                    .addComponent(deleteEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(updateEmployeeList)
                 .addGap(35, 35, 35))
         );
 
@@ -292,10 +277,8 @@ public class EmployeeList extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
-    private javax.swing.JButton addEmployee;
     private javax.swing.JTextField dateOfJoin;
     private javax.swing.JTextField dateOfResign;
-    private javax.swing.JButton deleteEmployee;
     private javax.swing.JLabel eMail;
     private javax.swing.JTextField empSalary;
     private javax.swing.JLabel jLabel1;
