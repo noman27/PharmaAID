@@ -55,7 +55,10 @@ public class SupplyRecord extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        head.setBackground(new java.awt.Color(0, 153, 153));
+
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("SUPPLY RECORDS");
 
@@ -76,6 +79,9 @@ public class SupplyRecord extends javax.swing.JFrame {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
+        body.setBackground(new java.awt.Color(255, 255, 255));
+
+        Supplies.setBackground(new java.awt.Color(204, 255, 204));
         Supplies.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -86,7 +92,9 @@ public class SupplyRecord extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Supplies);
 
+        ADDSupply.setBackground(new java.awt.Color(0, 153, 204));
         ADDSupply.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        ADDSupply.setForeground(new java.awt.Color(0, 0, 0));
         ADDSupply.setText("ADD NEW SUPPLY");
         ADDSupply.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +102,9 @@ public class SupplyRecord extends javax.swing.JFrame {
             }
         });
 
+        CancelBtn.setBackground(new java.awt.Color(204, 0, 0));
         CancelBtn.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        CancelBtn.setForeground(new java.awt.Color(0, 0, 0));
         CancelBtn.setText("BACK");
         CancelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,14 +112,21 @@ public class SupplyRecord extends javax.swing.JFrame {
             }
         });
 
+        Month.setBackground(new java.awt.Color(204, 255, 204));
+        Month.setForeground(new java.awt.Color(0, 0, 0));
         Month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
 
+        year.setBackground(new java.awt.Color(204, 255, 204));
+        year.setForeground(new java.awt.Color(0, 0, 0));
         year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("SUPPLY RECORD OF");
 
+        searchByeare.setBackground(new java.awt.Color(0, 204, 102));
         searchByeare.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        searchByeare.setForeground(new java.awt.Color(0, 0, 0));
         searchByeare.setText("SEARCH");
         searchByeare.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,9 +135,12 @@ public class SupplyRecord extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Supplied by           ");
 
+        searchBySupplier.setBackground(new java.awt.Color(0, 204, 0));
         searchBySupplier.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        searchBySupplier.setForeground(new java.awt.Color(0, 0, 0));
         searchBySupplier.setText("SEARCH");
         searchBySupplier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

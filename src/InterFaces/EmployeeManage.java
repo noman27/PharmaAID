@@ -36,7 +36,12 @@ public class EmployeeManage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("                        EMPLOYEE OPTIONS");
+        Head.setBackground(new java.awt.Color(0, 153, 153));
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText(" EMPLOYEE OPTIONS");
 
         javax.swing.GroupLayout HeadLayout = new javax.swing.GroupLayout(Head);
         Head.setLayout(HeadLayout);
@@ -55,6 +60,11 @@ public class EmployeeManage extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
+        Body.setBackground(new java.awt.Color(255, 255, 255));
+
+        EmpList.setBackground(new java.awt.Color(0, 204, 204));
+        EmpList.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        EmpList.setForeground(new java.awt.Color(0, 0, 0));
         EmpList.setText("EMPLOYEE LIST");
         EmpList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,6 +72,9 @@ public class EmployeeManage extends javax.swing.JFrame {
             }
         });
 
+        EmpContacts.setBackground(new java.awt.Color(0, 204, 204));
+        EmpContacts.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        EmpContacts.setForeground(new java.awt.Color(0, 0, 0));
         EmpContacts.setText("EMPLOYEE CONTACTS");
         EmpContacts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +82,9 @@ public class EmployeeManage extends javax.swing.JFrame {
             }
         });
 
+        Back.setBackground(new java.awt.Color(204, 0, 51));
+        Back.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        Back.setForeground(new java.awt.Color(0, 0, 0));
         Back.setText("BACK");
         Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,7 +101,7 @@ public class EmployeeManage extends javax.swing.JFrame {
                     .addGroup(BodyLayout.createSequentialGroup()
                         .addGap(95, 95, 95)
                         .addGroup(BodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(EmpContacts, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                            .addComponent(EmpContacts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(EmpList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(BodyLayout.createSequentialGroup()
                         .addGap(120, 120, 120)

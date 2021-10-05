@@ -84,6 +84,7 @@ public class Sales extends javax.swing.JFrame {
             }
         });
 
+        SaleTable.setBackground(new java.awt.Color(204, 255, 204));
         SaleTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

@@ -53,6 +53,7 @@ public class UserDashboard extends javax.swing.JFrame {
         userName = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
         user.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         user.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

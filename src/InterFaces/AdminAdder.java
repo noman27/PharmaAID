@@ -59,7 +59,10 @@ public class AdminAdder extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        TitlePanel.setBackground(new java.awt.Color(0, 153, 51));
+
         Title.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        Title.setForeground(new java.awt.Color(0, 0, 0));
         Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Title.setText("ADD USER ");
 
@@ -80,55 +83,78 @@ public class AdminAdder extends javax.swing.JFrame {
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
+        MainBody.setBackground(new java.awt.Color(255, 255, 255));
+        MainBody.setForeground(new java.awt.Color(0, 0, 0));
+
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Name :");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("User Name :");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Employee Type:");
 
+        Emptype.setBackground(new java.awt.Color(204, 255, 204));
         Emptype.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        Emptype.setForeground(new java.awt.Color(0, 0, 0));
         Emptype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Owner", "Staff" }));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("User Type   :    ");
 
+        Usertype.setBackground(new java.awt.Color(204, 255, 204));
         Usertype.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        Usertype.setForeground(new java.awt.Color(0, 0, 0));
         Usertype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Employee", "Customer" }));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Date of Join:");
 
+        Day.setBackground(new java.awt.Color(204, 255, 204));
         Day.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        Day.setForeground(new java.awt.Color(0, 0, 0));
         Day.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("/");
 
+        Month.setBackground(new java.awt.Color(204, 255, 204));
         Month.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        Month.setForeground(new java.awt.Color(0, 0, 0));
         Month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", " " }));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("/");
 
+        Year.setBackground(new java.awt.Color(204, 255, 204));
+        Year.setForeground(new java.awt.Color(0, 0, 0));
         Year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022" }));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Salary  :");
 
         Salary.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("User Password");
 
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Conf Password");
 
+        ADDbtn.setBackground(new java.awt.Color(0, 204, 102));
         ADDbtn.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        ADDbtn.setForeground(new java.awt.Color(0, 0, 0));
         ADDbtn.setText("ADD ");
         ADDbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +162,9 @@ public class AdminAdder extends javax.swing.JFrame {
             }
         });
 
+        CANCELbtn.setBackground(new java.awt.Color(204, 0, 0));
         CANCELbtn.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        CANCELbtn.setForeground(new java.awt.Color(0, 0, 0));
         CANCELbtn.setText("CANCEL");
         CANCELbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

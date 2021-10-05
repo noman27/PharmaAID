@@ -212,8 +212,8 @@ public class AdminDash extends javax.swing.JFrame {
     }//GEN-LAST:event_UserManageActionPerformed
 
     private void UpdateAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateAdminActionPerformed
-        UserDashboard.getID(id);
-        UserDashboard ud=new UserDashboard();
+        UserUpdater.getID(id);
+        UserUpdater ud=new UserUpdater();
         ud.setVisible(true);
     }//GEN-LAST:event_UpdateAdminActionPerformed
 

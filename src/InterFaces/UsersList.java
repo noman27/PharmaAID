@@ -52,6 +52,11 @@ public class UsersList extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 153, 51));
+
+        back.setBackground(new java.awt.Color(0, 153, 153));
+        back.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        back.setForeground(new java.awt.Color(0, 0, 0));
         back.setText("Back");
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,6 +65,7 @@ public class UsersList extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("USERS TABLE");
 
@@ -84,6 +90,9 @@ public class UsersList extends javax.swing.JFrame {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        UserTable.setBackground(new java.awt.Color(204, 255, 204));
         UserTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -99,6 +108,7 @@ public class UsersList extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(UserTable);
 
+        update.setBackground(new java.awt.Color(0, 153, 102));
         update.setText("UPDATE");
         update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,12 +121,15 @@ public class UsersList extends javax.swing.JFrame {
         status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Blocked" }));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Status");
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("UserID");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("User Name");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
